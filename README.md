@@ -1,6 +1,6 @@
 # Varun & Aarti – Wedding Invitation
 
-Static website: `index.html` (main invitation) and `royal.html` (Royal Palace version).
+Static website: `index.html` (Royal Palace version, main link) and `invitation.html` (Hindi invitation, at /invitation). `royal.html` only redirects old links.
 
 ## Run locally
     npm install
