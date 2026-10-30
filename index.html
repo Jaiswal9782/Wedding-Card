@@ -6,10 +6,10 @@
 <title>वरुण संग आरती – शुभ विवाह निमंत्रण</title>
 <meta property="og:title" content="वरुण संग आरती – शुभ विवाह निमंत्रण">
 <meta property="og:description" content="बुधवार, 25 नवम्बर 2026 · छोटी सादड़ी">
-<meta property="og:image" content="couple.jpg">
+<meta property="og:image" content="photos/couple-jacket.jpg">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&amp;family=Great+Vibes&amp;family=Jost:wght@400;500&amp;family=Tiro+Devanagari+Hindi&amp;family=Hind:wght@400;500;600&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&amp;family=Great+Vibes&amp;family=Jost:wght@400;500&amp;family=Noto+Serif+Devanagari:wght@400;600;700&amp;family=Noto+Sans+Devanagari:wght@400;500;600&amp;display=swap" rel="stylesheet">
 <style>
 body{margin:0;background:#EFE6DC}
 a{color:#7A1A2B}a:hover{color:#5C0F1E}
@@ -26,8 +26,13 @@ a{color:#7A1A2B}a:hover{color:#5C0F1E}
 </head>
 <body>
 <template id="tpl">
-<div style="width: 100%; display: flex; justify-content: center; background: #EFE6DC; font-family: 'Jost', 'Hind', sans-serif; color: #4A3A36">
+<div style="width: 100%; display: flex; justify-content: center; background: #EFE6DC; font-family: 'Jost', 'Noto Sans Devanagari', sans-serif; color: #4A3A36">
 <div style="width: 100%; max-width: 480px; display: flex; flex-direction: column; box-shadow: 0 0 50px rgba(92,15,30,0.18); overflow: hidden">
+<button type="button" onClick="{{toggleMusic}}" aria-pressed="{{musicOn}}" aria-label="{{musicLabel}}" style="position: fixed; right: 16px; bottom: 16px; z-index: 60; width: 52px; height: 52px; border-radius: 50%; border: 2px solid #C9A45C; background: #7A1A2B; color: #C9A45C; box-shadow: 0 6px 16px rgba(0,0,0,0.25); cursor: pointer; display: flex; align-items: center; justify-content: center">
+<sc-if value="{{musicOn}}" hint-placeholder-val="{{ false }}"><svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"></path><circle cx="6" cy="18" r="3"></circle><circle cx="18" cy="16" r="3"></circle></svg></sc-if>
+<sc-if value="{{musicOff}}" hint-placeholder-val="{{ true }}"><svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"></path><circle cx="6" cy="18" r="3"></circle><circle cx="18" cy="16" r="3"></circle><path d="M3 3l18 18"></path></svg></sc-if>
+</button>
+
 
 <!-- ================= 1. ENVELOPE COVER ================= -->
 <section class="envelope" style="position: relative; height: 800px; overflow: hidden">
@@ -53,17 +58,17 @@ a{color:#7A1A2B}a:hover{color:#5C0F1E}
 <div style="position: absolute; left: 0; right: 0; top: 0; bottom: 0; display: flex; flex-direction: column; align-items: center; padding-top: 230px; box-sizing: border-box; text-align: center">
 <p style="margin: 0; font-family: 'Cormorant Garamond', serif; font-size: 24px; letter-spacing: 2px; color: #7A6A55">tap to reveal</p>
 <svg aria-hidden="true" width="110" height="14" viewBox="0 0 110 14" fill="none" stroke="#9C8460" stroke-width="1"><line x1="0" y1="7" x2="44" y2="7"></line><line x1="66" y1="7" x2="110" y2="7"></line><path d="M55 1 L61 7 L55 13 L49 7 Z" fill="#9C8460"></path></svg>
-<a href="#invite" aria-label="निमंत्रण खोलें" class="pulse" style="display: block; margin-top: 18px; width: 150px; height: 150px; text-decoration: none">
+<a href="#invite" onClick="{{startSong}}" aria-label="निमंत्रण खोलें" class="pulse" style="display: block; margin-top: 18px; width: 150px; height: 150px; text-decoration: none">
 <svg aria-hidden="true" width="150" height="150" viewBox="0 0 120 120">
 <g fill="#8E1B2C"><circle cx="60" cy="60" r="46"></circle><circle cx="104" cy="60" r="16"></circle><circle cx="98.1" cy="82" r="16"></circle><circle cx="82" cy="98.1" r="16"></circle><circle cx="60" cy="104" r="16"></circle><circle cx="38" cy="98.1" r="16"></circle><circle cx="21.9" cy="82" r="16"></circle><circle cx="16" cy="60" r="16"></circle><circle cx="21.9" cy="38" r="16"></circle><circle cx="38" cy="21.9" r="16"></circle><circle cx="60" cy="16" r="16"></circle><circle cx="82" cy="21.9" r="16"></circle><circle cx="98.1" cy="38" r="16"></circle></g>
 <circle cx="60" cy="60" r="38" fill="#7A1626" stroke="#B5485A" stroke-width="1.5"></circle>
 <circle cx="60" cy="60" r="33" fill="none" stroke="#D9B98A" stroke-width="0.8"></circle>
-<text x="60" y="73" text-anchor="middle" font-family="Tiro Devanagari Hindi, serif" font-size="38" fill="#E6CFA0">ॐ</text>
+<text x="60" y="73" text-anchor="middle" font-family="Noto Serif Devanagari, serif" font-size="38" fill="#E6CFA0">ॐ</text>
 </svg>
 </a>
 <svg aria-hidden="true" width="110" height="14" viewBox="0 0 110 14" fill="none" stroke="#9C8460" stroke-width="1" style="margin-top: 22px"><line x1="0" y1="7" x2="44" y2="7"></line><line x1="66" y1="7" x2="110" y2="7"></line><path d="M55 1 L61 7 L55 13 L49 7 Z" fill="#9C8460"></path></svg>
-<h1 style="margin: 14px 0 4px; font-family: 'Tiro Devanagari Hindi', serif; font-weight: 400; font-size: 54px; line-height: 1.2; color: #9C7A3C">शुभ विवाह</h1>
-<p style="margin: 0; font-family: 'Tiro Devanagari Hindi', serif; font-size: 18px; line-height: 1.7; color: #8A6A2A">वक्रतुण्ड महाकाय सूर्यकोटि समप्रभ।<br>निर्विघ्नं कुरु मे देव सर्वकार्येषु सर्वदा॥</p>
+<h1 style="margin: 14px 0 4px; font-family: 'Noto Serif Devanagari', serif; font-weight: 400; font-size: 54px; line-height: 1.2; color: #9C7A3C">शुभ विवाह</h1>
+<p style="margin: 0; font-family: 'Noto Serif Devanagari', serif; font-size: 18px; line-height: 1.7; color: #8A6A2A">वक्रतुण्ड महाकाय सूर्यकोटि समप्रभ।<br>निर्विघ्नं कुरु मे देव सर्वकार्येषु सर्वदा॥</p>
 <svg aria-hidden="true" width="110" height="14" viewBox="0 0 110 14" fill="none" stroke="#9C8460" stroke-width="1" style="margin-top: 12px"><line x1="0" y1="7" x2="44" y2="7"></line><line x1="66" y1="7" x2="110" y2="7"></line><path d="M55 1 L61 7 L55 13 L49 7 Z" fill="#9C8460"></path></svg>
 </div>
 </section>
@@ -85,16 +90,16 @@ a{color:#7A1A2B}a:hover{color:#5C0F1E}
 </div>
 <div class="parchment" style="position: relative; width: calc(100% - 28px); box-sizing: border-box; padding: 30px 22px 34px; border-left: 3px double #C9A45C; border-right: 3px double #C9A45C; display: flex; flex-direction: column; align-items: center; gap: 12px; text-align: center">
 <div style="width: 100%; box-sizing: border-box; border: 1px solid #D9BE85; padding: 22px 14px 26px; display: flex; flex-direction: column; align-items: center; gap: 10px">
-<p style="margin: 0; font-family: 'Tiro Devanagari Hindi', serif; font-size: 34px; line-height: 1; color: #8E1B2C">卐</p>
-<p style="margin: 0; font-family: 'Tiro Devanagari Hindi', serif; font-size: 15px; line-height: 1.6; color: #8E1B2C">॥ श्री गणेशाय नमः ॥ &nbsp;॥ श्री साँवरिया सेठ की जय ॥<br>॥ श्री पितृदेवाय नमः ॥ &nbsp;॥ श्री कुलदेवताय नमः ॥<br>॥ श्री कालाजी गोराजी नमः ॥ &nbsp;॥ जय नव दुर्गा माँ ॥</p>
-<p style="margin: 6px 0 0; font-family: 'Tiro Devanagari Hindi', serif; font-size: 16px; line-height: 1.7; color: #6B4A2E">विघ्न हरण, मंगल करण, गणनायक गणराज।<br>रिद्धि-सिद्धि सहित पधारज्यो, सकल सुधारो काज॥</p>
+<p style="margin: 0; font-family: 'Noto Serif Devanagari', serif; font-size: 34px; line-height: 1; color: #8E1B2C">卐</p>
+<p style="margin: 0; font-family: 'Noto Serif Devanagari', serif; font-size: 15px; line-height: 1.6; color: #8E1B2C">॥ श्री गणेशाय नमः ॥ &nbsp;॥ श्री साँवरिया सेठ की जय ॥<br>॥ श्री पितृदेवाय नमः ॥ &nbsp;॥ श्री कुलदेवताय नमः ॥<br>॥ श्री कालाजी गोराजी नमः ॥ &nbsp;॥ जय नव दुर्गा माँ ॥</p>
+<p style="margin: 6px 0 0; font-family: 'Noto Serif Devanagari', serif; font-size: 16px; line-height: 1.7; color: #6B4A2E">विघ्न हरण, मंगल करण, गणनायक गणराज।<br>रिद्धि-सिद्धि सहित पधारज्यो, सकल सुधारो काज॥</p>
 <svg aria-hidden="true" width="140" height="14" viewBox="0 0 140 14" fill="none" stroke="#B08A3E" stroke-width="1"><line x1="0" y1="7" x2="58" y2="7"></line><line x1="82" y1="7" x2="140" y2="7"></line><circle cx="70" cy="7" r="5" fill="#B08A3E"></circle></svg>
-<p style="margin: 0; font-family: 'Hind', sans-serif; font-weight: 600; font-size: 17px; line-height: 1.5; color: #7A1A2B">श्रीमती बिरजा देवी<br><span style="font-weight: 400; font-size: 15px">धर्मपत्नि स्व. श्री केशूरामजी चौधरी</span></p>
-<p style="margin: 0; font-family: 'Tiro Devanagari Hindi', serif; font-style: italic; font-size: 16px; line-height: 1.6; color: #4A3A36">श्री साँवरिया सेठजी एवं परमपिता परमेश्वर की असीम अनुकम्पा से अपने सुपौत्र के मंगल परिणयोत्सव पर आपको सपरिवार सादर आमन्त्रित करती हैं</p>
-<h2 style="margin: 8px 0 0; font-family: 'Tiro Devanagari Hindi', serif; font-weight: 400; font-size: 36px; line-height: 1.2; color: #8C2F45">चि. वरुण <span style="font-size: 22px">(लोकेश)</span></h2>
+<p style="margin: 0; font-family: 'Noto Sans Devanagari', sans-serif; font-weight: 600; font-size: 17px; line-height: 1.5; color: #7A1A2B">श्रीमती बिरजा देवी<br><span style="font-weight: 400; font-size: 15px">धर्मपत्नि स्व. श्री केशूरामजी चौधरी</span></p>
+<p style="margin: 0; font-family: 'Noto Serif Devanagari', serif; font-style: italic; font-size: 16px; line-height: 1.6; color: #4A3A36">श्री साँवरिया सेठजी एवं परमपिता परमेश्वर की असीम अनुकम्पा से अपने सुपौत्र के मंगल परिणयोत्सव पर आपको सपरिवार सादर आमन्त्रित करती हैं</p>
+<h2 style="margin: 8px 0 0; font-family: 'Noto Serif Devanagari', serif; font-weight: 400; font-size: 36px; line-height: 1.2; color: #8C2F45">चि. वरुण</h2>
 <p style="margin: -6px 0 0; font-family: 'Great Vibes', cursive; font-size: 40px; line-height: 1; color: #B08A3E">संग</p>
-<h2 style="margin: 0; font-family: 'Tiro Devanagari Hindi', serif; font-weight: 400; font-size: 36px; line-height: 1.2; color: #8C2F45">सौ. कां. आरती</h2>
-<p style="margin: 0; font-family: 'Hind', sans-serif; font-size: 14px; line-height: 1.6; color: #6B4A2E">सुपुत्री : श्रीमती अनिता देवी एवं श्री नागेशजी जायसवाल</p>
+<h2 style="margin: 0; font-family: 'Noto Serif Devanagari', serif; font-weight: 400; font-size: 36px; line-height: 1.2; color: #8C2F45">सौ. कां. आरती</h2>
+<p style="margin: 0; font-family: 'Noto Sans Devanagari', sans-serif; font-size: 14px; line-height: 1.6; color: #6B4A2E">सुपुत्री : श्रीमती अनिता देवी एवं श्री नागेशजी जायसवाल</p>
 <svg aria-hidden="true" width="200" height="40" viewBox="0 0 200 40" fill="none" style="margin-top: 8px"><path d="M100 6 C90 18 90 28 100 36 C110 28 110 18 100 6Z" fill="#C2405A"></path><path d="M100 36 C84 32 76 22 78 12 C90 16 98 24 100 36Z" fill="#D9687E"></path><path d="M100 36 C116 32 124 22 122 12 C110 16 102 24 100 36Z" fill="#D9687E"></path><path d="M80 32 C60 36 40 28 20 30" stroke="#B08A3E" stroke-width="1.5"></path><path d="M120 32 C140 36 160 28 180 30" stroke="#B08A3E" stroke-width="1.5"></path><circle cx="20" cy="30" r="3" fill="#B08A3E"></circle><circle cx="180" cy="30" r="3" fill="#B08A3E"></circle></svg>
 </div>
 </div>
@@ -113,27 +118,38 @@ a{color:#7A1A2B}a:hover{color:#5C0F1E}
 <p style="margin: 0 0 18px; font-size: 16px; color: #7A1A2B">दो दिल, एक सुन्दर सफ़र</p>
 
 <div style="width: 230px; height: 230px; border-radius: 50%; border: 7px double #C9A45C; outline: 2px dotted #C9A45C; outline-offset: 9px; background: #F3E6D0; position: relative; overflow: hidden">
-<img src="couple.jpg" alt="चि. वरुण" style="position: absolute; width: 512px; height: 768px; max-width: none; left: -59px; top: -54px">
+<img src="photos/groom.jpg" alt="चि. वरुण" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 0%">
 </div>
 <p style="margin: 22px 0 0; font-size: 14px; letter-spacing: 5px; color: #8A6A2A">THE GROOM · वर</p>
-<h3 style="margin: 0; font-family: 'Tiro Devanagari Hindi', serif; font-weight: 400; font-size: 36px; color: #8C2F45">चि. वरुण (लोकेश)</h3>
+<h3 style="margin: 0; font-family: 'Noto Serif Devanagari', serif; font-weight: 400; font-size: 36px; color: #8C2F45">चि. वरुण (लोकेश)</h3>
 <p style="margin: 0; font-family: 'Cormorant Garamond', serif; font-size: 22px; color: #8C2F45">Varun</p>
-<p style="margin: 0 0 40px; font-family: 'Hind', sans-serif; font-size: 15px; line-height: 1.6; color: #4A3A36">सुपुत्र : श्रीमती कुसुमलता एवं श्री राजेश चौधरी<br>सुपौत्र : श्रीमती बिरजा देवी एवं स्व. श्री केशूरामजी चौधरी</p>
+<p style="margin: 0 0 40px; font-family: 'Noto Sans Devanagari', sans-serif; font-size: 15px; line-height: 1.6; color: #4A3A36">सुपुत्र : श्रीमती कुसुमलता एवं श्री राजेश चौधरी<br>सुपौत्र : श्रीमती बिरजा देवी एवं स्व. श्री केशूरामजी चौधरी</p>
 
 <div style="width: 230px; height: 230px; border-radius: 50%; border: 7px double #C9A45C; outline: 2px dotted #C9A45C; outline-offset: 9px; background: #F3E6D0; position: relative; overflow: hidden">
-<img src="couple.jpg" alt="सौ. कां. आरती" style="position: absolute; width: 512px; height: 768px; max-width: none; left: -213px; top: -80px">
+<img src="photos/bride.jpg" alt="सौ. कां. आरती" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 15%">
 </div>
 <p style="margin: 22px 0 0; font-size: 14px; letter-spacing: 5px; color: #8A6A2A">THE BRIDE · वधू</p>
-<h3 style="margin: 0; font-family: 'Tiro Devanagari Hindi', serif; font-weight: 400; font-size: 36px; color: #8C2F45">सौ. कां. आरती</h3>
+<h3 style="margin: 0; font-family: 'Noto Serif Devanagari', serif; font-weight: 400; font-size: 36px; color: #8C2F45">सौ. कां. आरती</h3>
 <p style="margin: 0; font-family: 'Cormorant Garamond', serif; font-size: 22px; color: #8C2F45">Aarti</p>
-<p style="margin: 0; font-family: 'Hind', sans-serif; font-size: 15px; line-height: 1.6; color: #4A3A36">सुपुत्री : श्रीमती अनिता देवी एवं श्री नागेशजी जायसवाल<br>सुपौत्री : स्व. श्रीमती सुगना बाई एवं स्व. श्री भगवतीलालजी जायसवाल</p>
+<p style="margin: 0; font-family: 'Noto Sans Devanagari', sans-serif; font-size: 15px; line-height: 1.6; color: #4A3A36">सुपुत्री : श्रीमती अनिता देवी एवं श्री नागेशजी जायसवाल<br>सुपौत्री : श्रीमती सुगना बाई एवं स्व. श्री भगवतीलालजी जायसवाल</p>
 
 <p style="margin: 44px 0 0; font-family: 'Great Vibes', cursive; font-size: 30px; color: #B08A3E">Captured Moments</p>
-<div style="margin-top: 14px; width: 300px; box-sizing: border-box; padding: 12px 12px 16px; background: #FFFFFF; border-radius: 6px; box-shadow: 0 14px 30px rgba(92,15,30,0.22); transform: rotate(-2deg); display: flex; flex-direction: column; align-items: center; gap: 10px">
-<img src="couple.jpg" alt="वरुण और आरती" style="display: block; width: 276px; height: 414px; object-fit: cover; border-radius: 3px">
+<div role="region" aria-label="फ़ोटो गैलरी – स्क्रॉल करें" tabindex="0" style="width: calc(100% + 48px); margin: 6px -24px 0; box-sizing: border-box; display: flex; gap: 18px; overflow-x: auto; scroll-snap-type: x mandatory; scroll-padding: 0 calc(50% - 150px); padding: 10px calc(50% - 150px) 24px; -webkit-overflow-scrolling: touch; scrollbar-width: none">
+<div style="flex: 0 0 300px; scroll-snap-align: center; box-sizing: border-box; padding: 12px 12px 16px; background: #FFFFFF; border-radius: 6px; box-shadow: 0 14px 30px rgba(92,15,30,0.22); transform: rotate(-2deg); display: flex; flex-direction: column; align-items: center; gap: 10px">
+<img src="photos/couple-jacket.jpg" alt="वरुण और आरती" style="display: block; width: 276px; height: 380px; object-fit: cover; object-position: 50% 20%; border-radius: 3px">
 <p style="margin: 0; font-family: 'Great Vibes', cursive; font-size: 30px; line-height: 1; color: #8C2F45">Varun &amp; Aarti</p>
 </div>
-<p style="margin: 36px 0 0; font-family: 'Tiro Devanagari Hindi', serif; font-style: italic; font-size: 21px; line-height: 1.7; color: #6B4A2E">“की सुमधुर बेला पर सपरिवार सस्नेह सादर आमन्त्रित है।<br>कृपया पधारकर वर-वधु को शुभाशीर्वाद प्रदान कर हमें अनुग्रहित करें।”</p>
+<div style="flex: 0 0 300px; scroll-snap-align: center; box-sizing: border-box; padding: 12px 12px 16px; background: #FFFFFF; border-radius: 6px; box-shadow: 0 14px 30px rgba(92,15,30,0.22); transform: rotate(2deg); display: flex; flex-direction: column; align-items: center; gap: 10px">
+<img src="photos/couple-kurta.jpg" alt="वरुण और आरती" style="display: block; width: 276px; height: 380px; object-fit: cover; object-position: 50% 15%; border-radius: 3px">
+<p style="margin: 0; font-family: 'Great Vibes', cursive; font-size: 30px; line-height: 1; color: #8C2F45">Together Forever</p>
+</div>
+<div style="flex: 0 0 300px; scroll-snap-align: center; box-sizing: border-box; padding: 12px 12px 16px; background: #FFFFFF; border-radius: 6px; box-shadow: 0 14px 30px rgba(92,15,30,0.22); transform: rotate(-1.5deg); display: flex; flex-direction: column; align-items: center; gap: 10px">
+<img src="couple.jpg" alt="वरुण और आरती" style="display: block; width: 276px; height: 380px; object-fit: cover; border-radius: 3px">
+<p style="margin: 0; font-family: 'Great Vibes', cursive; font-size: 30px; line-height: 1; color: #8C2F45">Blessed Moments</p>
+</div>
+</div>
+<p style="margin: 0; display: flex; align-items: center; gap: 8px; font-size: 14px; color: #8C2F45"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6l-6 6 6 6"></path></svg>स्वाइप करें · 3 फ़ोटो<svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"></path></svg></p>
+<p style="margin: 36px 0 0; font-family: 'Noto Serif Devanagari', serif; font-style: italic; font-size: 21px; line-height: 1.7; color: #6B4A2E">“की सुमधुर बेला पर सपरिवार सस्नेह सादर आमन्त्रित है।<br>कृपया पधारकर वर-वधु को शुभाशीर्वाद प्रदान कर हमें अनुग्रहित करें।”</p>
 </section>
 
 <!-- ================= 4. SAVE THE DATE ================= -->
@@ -154,7 +170,7 @@ a{color:#7A1A2B}a:hover{color:#5C0F1E}
 <sc-if value="{{revealed}}" hint-placeholder-val="{{ false }}">
 <div style="display: flex; flex-direction: column; align-items: center; gap: 8px; width: 100%">
 <p style="margin: 0; font-size: 13px; letter-spacing: 4px; color: #8A6A2A">शुभ लग्न</p>
-<p style="margin: 0; font-family: 'Tiro Devanagari Hindi', serif; font-size: 30px; line-height: 1.2; color: #7A1A2B">बुधवार, 25 नवम्बर 2026</p>
+<p style="margin: 0; font-family: 'Noto Serif Devanagari', serif; font-size: 30px; line-height: 1.2; color: #7A1A2B">बुधवार, 25 नवम्बर 2026</p>
 <p style="margin: 0; font-family: 'Cormorant Garamond', serif; font-size: 20px; color: #7A1A2B">Wednesday · रात्रि 11:00 बजे</p>
 <div style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; width: 100%; margin-top: 8px">
 <div style="background: #7A1A2B; border-radius: 12px; padding: 10px 2px; display: flex; flex-direction: column"><span style="font-family: 'Cormorant Garamond', serif; font-weight: 600; font-size: 30px; color: #FFF6E8">{{cd.d}}</span><span style="font-size: 12px; color: #F6E7D2">दिन</span></div>
@@ -178,15 +194,15 @@ a{color:#7A1A2B}a:hover{color:#5C0F1E}
 <button type="button" onClick="{{openBook}}" style="width: 100%; box-sizing: border-box; border: 0; padding: 0; cursor: pointer; text-align: left; font-family: inherit; background: transparent">
 <div class="velvet" style="border-radius: 6px 18px 18px 6px; border-left: 10px solid #5C0F1E; box-shadow: 0 14px 30px rgba(92,15,30,0.35); padding: 26px 20px 22px; display: flex; flex-direction: column; align-items: center; gap: 10px; color: #F6E7D2">
 <svg aria-hidden="true" width="220" height="36" viewBox="0 0 220 36" fill="none" stroke="#D9B98A" stroke-width="1.4"><path d="M0 34 C40 34 60 30 80 14 C92 4 104 2 110 2 C116 2 128 4 140 14 C160 30 180 34 220 34"></path><path d="M110 8 L116 16 L110 24 L104 16 Z" fill="#D9B98A"></path></svg>
-<p style="margin: 0; font-family: 'Tiro Devanagari Hindi', serif; font-size: 30px; color: #E6CFA0">卐</p>
+<p style="margin: 0; font-family: 'Noto Serif Devanagari', serif; font-size: 30px; color: #E6CFA0">卐</p>
 <h2 style="margin: 0; font-family: 'Cormorant Garamond', serif; font-weight: 500; font-size: 34px; color: #FFF6E8">Wedding Functions</h2>
 <p style="margin: 0 0 6px; font-size: 15px">आप हर कार्यक्रम में पधारें, यही हमारी कामना है।</p>
 <div style="width: 100%; display: flex; flex-direction: column; gap: 7px">
 <sc-for list="{{events}}" as="e" hint-placeholder-count="11">
 <div style="display: flex; align-items: baseline; gap: 6px; font-size: 14px">
-<span style="font-family: 'Hind', sans-serif; font-weight: 500; color: #FFF6E8; white-space: nowrap">{{e.name}}</span>
+<span style="font-family: 'Noto Sans Devanagari', sans-serif; font-weight: 500; color: #FFF6E8; white-space: nowrap">{{e.name}}</span>
 <span aria-hidden="true" style="flex: 1; border-bottom: 1px dotted rgba(246,231,210,0.5); transform: translateY(-4px)"></span>
-<span style="font-family: 'Hind', sans-serif; color: #F6E7D2; white-space: nowrap">{{e.short}}</span>
+<span style="font-family: 'Noto Sans Devanagari', sans-serif; color: #F6E7D2; white-space: nowrap">{{e.short}}</span>
 </div>
 </sc-for>
 </div>
@@ -200,23 +216,23 @@ a{color:#7A1A2B}a:hover{color:#5C0F1E}
 <div style="width: 100%; box-sizing: border-box; border-radius: 22px; background: #FFFBF5; border: 1.5px solid #E0CBA2; box-shadow: 0 12px 28px rgba(92,15,30,0.12); overflow: hidden">
 <div class="velvet" style="padding: 26px 20px 22px; display: flex; flex-direction: column; align-items: center; gap: 6px; text-align: center">
 <p style="margin: 0; font-family: 'Cormorant Garamond', serif; font-size: 18px; letter-spacing: 3px; color: #E6CFA0">{{cur.idx}}</p>
-<h3 style="margin: 0; font-family: 'Tiro Devanagari Hindi', serif; font-weight: 400; font-size: 30px; line-height: 1.25; color: #FFF6E8">{{cur.name}}</h3>
+<h3 style="margin: 0; font-family: 'Noto Serif Devanagari', serif; font-weight: 400; font-size: 30px; line-height: 1.25; color: #FFF6E8">{{cur.name}}</h3>
 </div>
 <div style="padding: 20px; display: flex; flex-direction: column; gap: 14px">
 <div style="display: flex; gap: 12px; align-items: center">
 <svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#8C2F45" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="2"></rect><path d="M3 10h18M8 3v4M16 3v4"></path></svg>
-<span style="font-family: 'Hind', sans-serif; font-size: 16px">{{cur.date}}</span>
+<span style="font-family: 'Noto Sans Devanagari', sans-serif; font-size: 16px">{{cur.date}}</span>
 </div>
 <div style="display: flex; gap: 12px; align-items: center">
 <svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#8C2F45" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"></circle><path d="M12 7v5l3 2"></path></svg>
-<span style="font-family: 'Hind', sans-serif; font-size: 16px">{{cur.time}}</span>
+<span style="font-family: 'Noto Sans Devanagari', sans-serif; font-size: 16px">{{cur.time}}</span>
 </div>
 <div style="display: flex; gap: 12px; align-items: flex-start">
 <svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#8C2F45" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="flex: 0 0 auto; margin-top: 2px"><path d="M12 21s-7-6.5-7-12a7 7 0 0 1 14 0c0 5.5-7 12-7 12z"></path><circle cx="12" cy="9" r="2.5"></circle></svg>
-<span style="font-family: 'Hind', sans-serif; font-size: 16px; line-height: 1.5"><strong style="font-weight: 600; color: #7A1A2B">{{cur.venue}}</strong><br>{{cur.addr}}</span>
+<span style="font-family: 'Noto Sans Devanagari', sans-serif; font-size: 16px; line-height: 1.5"><strong style="font-weight: 600; color: #7A1A2B">{{cur.venue}}</strong><br>{{cur.addr}}</span>
 </div>
 <sc-if value="{{cur.note}}" hint-placeholder-val="{{ false }}">
-<p style="margin: 0; padding: 12px 14px; border-radius: 12px; background: #F6EEDF; font-family: 'Hind', sans-serif; font-size: 14px; line-height: 1.6">{{cur.note}}</p>
+<p style="margin: 0; padding: 12px 14px; border-radius: 12px; background: #F6EEDF; font-family: 'Noto Sans Devanagari', sans-serif; font-size: 14px; line-height: 1.6">{{cur.note}}</p>
 </sc-if>
 <a href="{{cur.map}}" target="_blank" rel="noopener" style="display: flex; align-items: center; justify-content: center; gap: 10px; min-height: 52px; border-radius: 999px; background: #C25A72; color: #FFFFFF; text-decoration: none; font-size: 17px">
 <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l18-8-8 18-2-8-8-2z"></path></svg>Get Directions</a>
@@ -237,14 +253,14 @@ a{color:#7A1A2B}a:hover{color:#5C0F1E}
 <sc-for list="{{venues}}" as="v" hint-placeholder-count="3">
 <div style="width: 100%; box-sizing: border-box; border-radius: 22px; background: #FFFBF5; padding: 22px 20px; display: flex; flex-direction: column; gap: 8px; box-shadow: 0 10px 24px rgba(0,0,0,0.25)">
 <p style="margin: 0; font-family: 'Cormorant Garamond', serif; font-size: 20px; color: #8C2F45">{{v.kicker}}</p>
-<h3 style="margin: 0; font-family: 'Tiro Devanagari Hindi', serif; font-weight: 400; font-size: 26px; line-height: 1.3; color: #7A1A2B">{{v.name}}</h3>
-<p style="margin: 0; font-family: 'Hind', sans-serif; font-size: 15px; line-height: 1.5; color: #4A3A36">{{v.addr}}</p>
-<p style="margin: 0; font-family: 'Hind', sans-serif; font-size: 15px; line-height: 1.5; color: #6B4A2E">{{v.when}}</p>
+<h3 style="margin: 0; font-family: 'Noto Serif Devanagari', serif; font-weight: 400; font-size: 26px; line-height: 1.3; color: #7A1A2B">{{v.name}}</h3>
+<p style="margin: 0; font-family: 'Noto Sans Devanagari', sans-serif; font-size: 15px; line-height: 1.5; color: #4A3A36">{{v.addr}}</p>
+<p style="margin: 0; font-family: 'Noto Sans Devanagari', sans-serif; font-size: 15px; line-height: 1.5; color: #6B4A2E">{{v.when}}</p>
 <a href="{{v.map}}" target="_blank" rel="noopener" style="margin-top: 6px; display: flex; align-items: center; justify-content: center; gap: 10px; min-height: 50px; border-radius: 999px; border: 1.5px solid #D9BE85; background: #FFF8EC; color: #4A3A36; text-decoration: none; font-size: 17px">
-<svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#B08A3E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3h7v7M21 3l-9 9M19 14v5a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h5"></path></svg>Open Google Maps</a>
+<svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#B08A3E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3h7v7M21 3l-9 9M19 14v5a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h5"></path></svg><span>Open Google Maps</span></a>
 </div>
 </sc-for>
-<div style="width: 100%; box-sizing: border-box; border-radius: 16px; border: 1px solid rgba(230,207,160,0.5); padding: 14px 16px; font-family: 'Hind', sans-serif; font-size: 14px; line-height: 1.6; color: #F6E7D2"><strong style="color: #E6CFA0">नोट : </strong>बारात ब्याईजी सा. श्री नागेशजी, महेशजी, दिनेशजी जायसवाल, निवासी-छोटी सादड़ी वालों के यहाँ दि. 24 नवम्बर 2026, मंगलवार को बस द्वारा रात्रि 9:15 बजे जायेगी।</div>
+<div style="width: 100%; box-sizing: border-box; border-radius: 16px; border: 1px solid rgba(230,207,160,0.5); padding: 14px 16px; font-family: 'Noto Sans Devanagari', sans-serif; font-size: 14px; line-height: 1.6; color: #F6E7D2"><strong style="color: #E6CFA0">नोट : </strong>बारात ब्याईजी सा. श्री नागेशजी, महेशजी, दिनेशजी जायसवाल, निवासी-छोटी सादड़ी वालों के यहाँ दि. 24 नवम्बर 2026, मंगलवार को बस द्वारा रात्रि 9:15 बजे जायेगी।</div>
 </section>
 <svg aria-hidden="true" width="100%" height="22" viewBox="0 0 480 22" preserveAspectRatio="none" style="display: block; margin-top: -1px; background: #FBF4EE; transform: scaleY(-1)"><path d="M0 22 L0 12 L18 15 L30 7 L48 13 L62 5 L80 12 L96 6 L112 14 L130 8 L146 13 L160 4 L178 11 L194 7 L210 15 L226 6 L244 12 L258 5 L276 13 L292 7 L308 14 L324 6 L340 11 L356 4 L372 13 L388 7 L404 14 L420 6 L436 12 L452 5 L468 13 L480 8 L480 22 Z" fill="#7A1A2B"></path></svg>
 
@@ -254,18 +270,22 @@ a{color:#7A1A2B}a:hover{color:#5C0F1E}
 <h2 style="margin: 0 0 10px; text-align: center; font-family: 'Cormorant Garamond', serif; font-weight: 500; font-size: 38px; color: #7A1A2B">Our Families</h2>
 <sc-for list="{{fams}}" as="f" hint-placeholder-count="4">
 <div style="border: 1px solid #E0CBA2; border-radius: 16px; background: #FFFBF5; overflow: hidden">
-<button type="button" onClick="{{f.toggle}}" aria-expanded="{{f.open}}" style="width: 100%; min-height: 56px; padding: 0 18px; display: flex; justify-content: space-between; align-items: center; gap: 10px; background: transparent; border: 0; cursor: pointer; font-family: 'Tiro Devanagari Hindi', serif; font-size: 20px; color: #7A1A2B; text-align: left">{{f.title}}
+<button type="button" onClick="{{f.toggle}}" aria-expanded="{{f.open}}" style="width: 100%; min-height: 56px; padding: 0 18px; display: flex; justify-content: space-between; align-items: center; gap: 10px; background: transparent; border: 0; cursor: pointer; font-family: 'Noto Serif Devanagari', serif; font-size: 20px; color: #7A1A2B; text-align: left">{{f.title}}
 <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#B08A3E" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="{{f.chev}}"><path d="M6 9l6 6 6-6"></path></svg>
 </button>
 <sc-if value="{{f.open}}" hint-placeholder-val="{{ false }}">
-<p style="margin: 0; padding: 0 18px 18px; font-family: 'Hind', sans-serif; font-size: 15px; line-height: 1.8; color: #4A3A36">{{f.text}}</p>
+<ul style="margin: 0 18px 18px; padding: 4px 0 0 4px; list-style: none; display: flex; flex-direction: column; align-items: stretch; gap: 0; text-align: left; border-left: 2px solid #C9A45C; font-family: 'Noto Sans Devanagari', sans-serif; font-size: 16px; line-height: 1.55; color: #4A3A36">
+<sc-for list="{{f.names}}" as="nm" hint-placeholder-count="6">
+<li style="display: flex; align-items: baseline; justify-content: flex-start; gap: 10px; padding: 7px 4px 7px 12px; border-bottom: 1px dashed #E8D7B8"><span aria-hidden="true" style="flex: 0 0 auto; color: #8C2F45; font-size: 10px; {{nm.dot}}">●</span><span>{{nm.text}}</span></li>
+</sc-for>
+</ul>
 </sc-if>
 </div>
 </sc-for>
 <div style="margin-top: 22px; text-align: center; display: flex; flex-direction: column; gap: 6px">
 <p style="margin: 0; font-size: 13px; letter-spacing: 4px; color: #8A6A2A">बाल मनुहार</p>
-<p style="margin: 0; font-family: 'Tiro Devanagari Hindi', serif; font-style: italic; font-size: 20px; line-height: 1.7; color: #9C7A3C">“हल्दी है, चन्दन है, रिश्तों का बन्धन है,<br>हमारे मामा/चाचा की शादी में<br>आपका हार्दिक अभिनन्दन है।”</p>
-<p style="margin: 0; font-family: 'Hind', sans-serif; font-size: 15px; color: #7A1A2B">— एकांश, निरवी, देवांश, हेमाक्षी</p>
+<p style="margin: 0; font-family: 'Noto Serif Devanagari', serif; font-style: italic; font-size: 20px; line-height: 1.7; color: #9C7A3C">“हल्दी है, चन्दन है, रिश्तों का बन्धन है,<br>हमारे मामा/चाचा की शादी में<br>आपका हार्दिक अभिनन्दन है।”</p>
+<p style="margin: 0; font-family: 'Noto Sans Devanagari', sans-serif; font-size: 15px; color: #7A1A2B">— एकांश, निरवी, देवांश, हेमाक्षी</p>
 </div>
 </section>
 
@@ -280,12 +300,12 @@ a{color:#7A1A2B}a:hover{color:#5C0F1E}
 <p style="margin: 14px 0 0; font-family: 'Great Vibes', cursive; font-size: 54px; line-height: 1.1; color: #8C2F45">Varun &amp; Aarti</p>
 <svg aria-hidden="true" width="200" height="16" viewBox="0 0 200 16" fill="none" stroke="#B08A3E" stroke-width="1"><line x1="0" y1="8" x2="76" y2="8"></line><line x1="124" y1="8" x2="200" y2="8"></line><circle cx="100" cy="8" r="5" fill="#8C2F45" stroke="none"></circle><circle cx="86" cy="8" r="3" fill="#8C2F45" stroke="none"></circle><circle cx="114" cy="8" r="3" fill="#8C2F45" stroke="none"></circle></svg>
 <p style="margin: 6px 0 0; font-family: 'Cormorant Garamond', serif; font-size: 20px; color: #7A1A2B">“आपकी उपस्थिति ही हमारा सौभाग्य है”</p>
-<p style="margin: 0; font-family: 'Hind', sans-serif; font-size: 15px; color: #6B4A2E">बुधवार, 25 नवम्बर 2026 · छोटी सादड़ी</p>
+<p style="margin: 0; font-family: 'Noto Sans Devanagari', sans-serif; font-size: 15px; color: #6B4A2E">बुधवार, 25 नवम्बर 2026 · छोटी सादड़ी</p>
 
 <div style="margin-top: 22px; width: 100%; box-sizing: border-box; border-radius: 20px; border: 1px solid #E0CBA2; background: #FFFBF5; padding: 20px; display: flex; flex-direction: column; align-items: center; gap: 6px">
 <p style="margin: 0; font-size: 13px; letter-spacing: 4px; color: #8A6A2A">उत्तराकांक्षी</p>
-<p style="margin: 0; font-family: 'Tiro Devanagari Hindi', serif; font-size: 22px; color: #7A1A2B">राजेशकुमार - कुसुमलता जायसवाल</p>
-<p style="margin: 0; font-family: 'Hind', sans-serif; font-size: 15px; line-height: 1.6">D-ब्लॉक-15, मंगलम विला, तारागढ़ रोड,<br>चन्द्रवरदाई नगर, अजमेर (राज.)</p>
+<p style="margin: 0; font-family: 'Noto Serif Devanagari', serif; font-size: 22px; color: #7A1A2B">राजेशकुमार - कुसुमलता जायसवाल</p>
+<p style="margin: 0; font-family: 'Noto Sans Devanagari', sans-serif; font-size: 15px; line-height: 1.6">D-ब्लॉक-15, मंगलम विला, तारागढ़ रोड,<br>चन्द्रवरदाई नगर, अजमेर (राज.)</p>
 <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-top: 8px">
 <a href="tel:+919982556447" style="display: inline-flex; align-items: center; gap: 8px; min-height: 46px; padding: 0 18px; border-radius: 999px; background: #7A1A2B; color: #FFF6E8; text-decoration: none; font-size: 15px">
 <svg aria-hidden="true" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.5c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"></path></svg>99825 56447</a>
@@ -306,7 +326,7 @@ a{color:#7A1A2B}a:hover{color:#5C0F1E}
 class Component extends DCLogic {
   constructor(props) {
     super(props);
-    this.state = { revealed: false, ev: -1, fam: 'darshan', now: Date.now() };
+    this.state = { revealed: false, ev: -1, fam: 'darshan', now: Date.now(), musicOn: false };
   }
   componentDidMount() {
     this.timer = setInterval(() => this.setState({ now: Date.now() }), 1000);
@@ -314,11 +334,21 @@ class Component extends DCLogic {
   componentWillUnmount() {
     clearInterval(this.timer);
   }
+  /* ---------- background song: Aaj Sajeya ---------- */
+  playMusic() {
+    if (!this.audio) { this.audio = new Audio('music/aaj-sajeya.mp3'); this.audio.loop = true; this.audio.volume = 0.85; }
+    const p = this.audio.play(); if (p && p.catch) p.catch(() => {});
+    if (!this.state.musicOn) this.setState({ musicOn: true });
+  }
+  pauseSong() {
+    if (this.audio) this.audio.pause();
+    if (this.state.musicOn) this.setState({ musicOn: false });
+  }
   renderVals() {
     const map = (q) => 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(q);
-    const home = { venue: 'निजी आवास', addr: 'चन्द्रवरदाई नगर, अजमेर (राज.)', map: map('Chandravardai Nagar, Ajmer, Rajasthan') };
-    const sai = { venue: 'साँईबाबा समारोह स्थल', addr: 'नेहरू नगर, अजय नगर, अजमेर (राज.)', map: map('Sai Baba Samaroh Sthal, Ajay Nagar, Ajmer') };
-    const sadri = { venue: 'हिन्दू धर्मशाला (पिछला भाग)', addr: 'छोटी सादड़ी, जिला – प्रतापगढ़ (राज.)', map: map('Hindu Dharamshala, Chhoti Sadri, Pratapgarh, Rajasthan') };
+    const home = { venue: 'निजी आवास', addr: 'चन्द्रवरदाई नगर, अजमेर (राज.)', map: 'https://maps.app.goo.gl/mRPSBFGfPWd5tRVt9' };
+    const sai = { venue: 'साँईबाबा समारोह स्थल', addr: 'नेहरू नगर, अजय नगर, अजमेर (राज.)', map: 'https://maps.app.goo.gl/RvrmvrGNf6ztwX9KA' };
+    const sadri = { venue: 'हिन्दू धर्मशाला (पिछला भाग)', addr: 'छोटी सादड़ी, जिला – प्रतापगढ़ (राज.)', map: 'https://maps.app.goo.gl/S5yhPzRwmTqPFAEU6' };
     const D19 = 'गुरुवार, 19 नवम्बर 2026', D23 = 'सोमवार, 23 नवम्बर 2026', D24 = 'मंगलवार, 24 नवम्बर 2026', D25 = 'बुधवार, 25 नवम्बर 2026', D26 = 'गुरुवार, 26 नवम्बर 2026';
     const raw = [
       { name: 'श्री गणेश स्थापना', short: 'गुरु, 19 नव.', date: D19, time: 'प्रातः 7:15 बजे', ...home },
@@ -342,20 +372,24 @@ class Component extends DCLogic {
     const prevOn = ev >= 0, nextOn = ev < n - 1;
 
     const venues = [
-      { kicker: 'The Venue · विवाह', name: sadri.venue, addr: sadri.addr, when: 'बुधवार, 25 नवम्बर 2026 · ओढ़नी/तिलक एवं शुभ लग्न', map: sadri.map },
+      { kicker: 'The Venue · निवास', name: home.venue, addr: home.addr, when: '19 एवं 23 नवम्बर 2026 के सभी कार्यक्रम', map: home.map },
       { kicker: 'The Venue · समारोह', name: sai.venue, addr: sai.addr, when: '24 एवं 26 नवम्बर 2026 के सभी कार्यक्रम', map: sai.map },
-      { kicker: 'The Venue · निवास', name: home.venue, addr: home.addr, when: '19 एवं 23 नवम्बर 2026 के सभी कार्यक्रम', map: home.map }
+      { kicker: 'The Venue · विवाह', name: sadri.venue, addr: sadri.addr, when: 'बुधवार, 25 नवम्बर 2026 · ओढ़नी/तिलक एवं शुभ लग्न', map: sadri.map }
     ];
 
     const famRaw = [
-      { id: 'darshan', title: 'दर्शनाभिलाषी', text: 'श्री रमेशचन्द्रजी-चन्द्रकान्ता, अशोकजी-शकुन्तला बाई, राजेन्द्रजी-सुशीला बाई, स्व. श्री गजेन्द्रजी-विजयलक्ष्मी, देवेन्द्रजी-राधा बाई, मनीषजी-मधु बाई, विकासजी-ममता बाई, लोकेश-चन्द्रकान्ता, पिन्टू-गायत्री, इन्द्रजीत-सन्तोष, दीपक-मिथलेश, हेमन्त-अंतिमा, चन्द्रशेखर-अनुराधा, योगेश-रेखा एवं समस्त मेलीवाल परिवार।' },
+      { id: 'darshan', title: 'दर्शनाभिलाषी', text: 'श्री रमेशचन्द्रजी-चन्द्रकान्ता, \nअशोकजी-शकुन्तला बाई, \nराजेन्द्रजी-सुशीला बाई, \nस्व. श्री गजेन्द्रजी-विजयलक्ष्मी, \nदेवेन्द्रजी-राधा बाई, \nमनीषजी-मधु बाई, \nविकासजी-ममता बाई, \nलोकेश-चन्द्रकान्ता, \nपिन्टू-गायत्री, \nइन्द्रजीत-सन्तोष, \nदीपक-मिथलेश, \nहेमन्त-अंतिमा, \nचन्द्रशेखर-अनुराधा, \nयोगेश-रेखा, कपिल जी, प्रिंस जी एवं समस्त मेलीवाल परिवार।' },
       { id: 'aagrah', title: 'विशेष आग्रह', text: 'राजेन्द्रजी-सुशीला, इन्द्रजीतजी-सन्तोष, मनीषजी-मधुबाला, भारती-दिनेशजी, जितेन्द्र-निशा, योगेश-रेखा, गौरव, सौरभ, कपिल, प्रिन्स, युगलकिशोर-सीमा, देवांश, हेमाक्षी' },
       { id: 'nanihal', title: 'ननिहाल पक्ष', text: 'स्व. श्री दौलतरामजी-स्व. श्रीमती मेहताब देवी, स्व. श्री मदनलालजी-स्व. श्रीमती प्रेम देवी, स्व. श्री केसरीमलजी-श्रीमती चन्दा देवी, स्व. श्री राजेन्द्रजी-स्व. श्रीमती सुशीला देवी, श्री महेन्द्रजी-श्रीमती रुजन देवी, स्व. श्री सुरेन्द्रजी-श्रीमती दक्षा देवी, स्व. श्री प्रकाशजी-श्रीमती इन्द्रा देवी, श्री राकेशजी-श्रीमती शोभा देवी, श्री गगनजी, श्री यशराजजी एवं समस्त जायसवाल परिवार (अजमेर)' },
-      { id: 'swagat', title: 'स्वागतातुर', text: 'श्रीमती देवकन्या बेबी-स्व. श्री रामकिशनजी, श्रीमती शोभा-डॉ. स्व. श्री प्रेमचन्दजी, श्रीमती उमा-स्व. श्री जगदीशजी, श्रीमती सुनीता-श्री अरुणजी, डॉ. आरती, श्रीमती साची-श्री अतुलजी, पंकजजी, सुनीलजी, डॉ. दीपेन्द्रसिंहजी, रणजीतजी, वैभवजी, मधुबाला-मनीषजी, भारती-दिनेशजी, लवीना-जिगरजी, गौरवजी, सौरभजी' }
+      { id: 'swagat', title: 'स्वागतातुर', text: 'श्रीमती देवकन्या बेबी-स्व. श्री रामकिशनजी, श्रीमती शोभा-डॉ. स्व. श्री प्रेमचन्दजी, श्रीमती उमा-स्व. श्री जगदीशजी, श्रीमती सुनीता-श्री अरुणजी, डॉ. आरती, श्रीमती साची-श्री अतुलजी, पंकजजी, सुनीलजी, डॉ. दीपेन्द्रसिंहजी, रणजीतजी, वैभवजी, मधुबाला-मनीषजी, भारती-दिनेशजी, लवीना-जिगरजी, गौरवजी, सौरभजी, कपिल जी, प्रिंस जी' }
     ];
     const fams = famRaw.map((f) => {
       const open = f.id === this.state.fam;
-      return { title: f.title, text: f.text, open: open,
+      const names = [];
+      f.text.replace(/।\s*$/, '').split(/\s*[,\n]\s*/).forEach((part) => {
+        part.split(/\s+एवं\s+/).forEach((p, k) => { const t = p.trim(); if (t) names.push(k > 0 ? 'एवं ' + t : t); });
+      });
+      return { title: f.title, text: f.text, names: names.map((x) => ({ text: x, dot: /^एवं /.test(x) ? 'visibility: hidden;' : '' })), open: open,
         chev: 'transition: transform .2s; transform: rotate(' + (open ? '180' : '0') + 'deg)',
         toggle: () => this.setState({ fam: open ? '' : f.id }) };
     });
@@ -365,6 +399,10 @@ class Component extends DCLogic {
     const cd = { d: String(Math.floor(diff / 86400000)), h: pad2(Math.floor(diff / 3600000) % 24), m: pad2(Math.floor(diff / 60000) % 60), s: pad2(Math.floor(diff / 1000) % 60) };
 
     return {
+      startSong: () => this.playMusic(),
+      musicOn: !!this.state.musicOn, musicOff: !this.state.musicOn,
+      musicLabel: this.state.musicOn ? 'गाना बंद करें' : 'गाना चालू करें',
+      toggleMusic: () => { if (this.state.musicOn) this.pauseSong(); else this.playMusic(); },
       revealed: this.state.revealed, notRevealed: !this.state.revealed,
       reveal: () => this.setState({ revealed: true }),
       events: raw, onCover: ev < 0, onEvent: ev >= 0, cur,
