@@ -6,15 +6,11 @@ Static website: `index.html` (Royal Palace version, main link) and `invitation.h
     npm install
     npm start        # http://localhost:3000
 
-## Deploy on Railway
-Option A – GitHub: push this folder to a GitHub repo → railway.com → New Project → Deploy from GitHub repo → pick the repo.
-Then Settings → Networking → Generate Domain.
+## Deploy (Vercel)
+The Vercel project `wedding-card` is connected to the GitHub repo `Jaiswal9782/Wedding-Card`.
+Every push to `main` deploys to production automatically – nothing else to run.
 
-Option B – CLI:
-    npm i -g @railway/cli
-    railway login
-    railway init       # create a new project
-    railway up         # upload & deploy this folder
-    railway domain     # get a public URL
+    bash ~/Development/wedding-tools/push.sh "message"   # commit + push → deploys
 
-Railway detects Node, runs `npm install` and `npm start`, and sets PORT automatically.
+`autopush.sh` (launchd, every minute) also pushes any pending change on its own.
+Routing (clean URLs, `/royal` → `/`) lives in `vercel.json`.
