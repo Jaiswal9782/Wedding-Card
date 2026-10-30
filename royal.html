@@ -369,18 +369,30 @@ class Component extends DCLogic {
     this.state = { answered: false, slide: 0, env: false, ev: -1, fam: 'darshan', now: Date.now(), musicOn: false };
   }
   componentDidMount() {
+    this.playMusic();
     this.timer = setInterval(() => this.setState({ now: Date.now() }), 1000);
   }
   componentWillUnmount() {
+    if (this.audio) this.audio.pause();
     clearInterval(this.timer);
   }
-  /* ---------- background song: Aaj Sajeya ---------- */
-  playMusic() {
-    if (!this.audio) { this.audio = new Audio('music/aaj-sajeya.mp3'); this.audio.loop = true; this.audio.volume = 0.85; }
-    const p = this.audio.play(); if (p && p.catch) p.catch(() => {});
-    if (!this.state.musicOn) this.setState({ musicOn: true });
+  /* ---------- background song: Aaj Sajeya (plays by default) ---------- */
+  playMusic(fromUser) {
+    if (fromUser === true) this.userPaused = false;
+    if (this.userPaused) return;
+    if (!this.audio) { this.audio = new Audio('music/aaj-sajeya.mp3'); this.audio.loop = true; this.audio.volume = 0.85; this.audio.preload = 'auto'; }
+    const p = this.audio.play();
+    const ok = () => { if (!this.state.musicOn) this.setState({ musicOn: true }); };
+    if (p && p.then) p.then(ok).catch(() => this.armAutoplay()); else ok();
+  }
+  armAutoplay() {
+    if (this.armed) return;
+    this.armed = true;
+    const go = () => { this.armed = false; ['pointerdown', 'touchstart', 'keydown'].forEach((e) => document.removeEventListener(e, go, true)); this.playMusic(); };
+    ['pointerdown', 'touchstart', 'keydown'].forEach((e) => document.addEventListener(e, go, true));
   }
   pauseSong() {
+    this.userPaused = true;
     if (this.audio) this.audio.pause();
     if (this.state.musicOn) this.setState({ musicOn: false });
   }
@@ -473,7 +485,7 @@ class Component extends DCLogic {
     return {
       musicOn: !!this.state.musicOn, musicOff: !this.state.musicOn,
       musicLabel: this.state.musicOn ? 'गाना बंद करें' : 'गाना चालू करें',
-      toggleMusic: () => { if (this.state.musicOn) this.pauseSong(); else this.playMusic(); },
+      toggleMusic: () => { if (this.state.musicOn) this.pauseSong(); else this.playMusic(true); },
       notAnswered: !s.answered,
       slide,
       knobStyle: 'position: absolute; top: 4px; left: calc((100% - 72px) * ' + (slide / 100).toFixed(3) + ' + 4px); width: 64px; height: 64px; border-radius: 50%; background: #FFFFFF; box-shadow: 0 4px 12px rgba(0,0,0,0.25); display: flex; align-items: center; justify-content: center; pointer-events: none; z-index: 1;',

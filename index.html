@@ -329,18 +329,30 @@ class Component extends DCLogic {
     this.state = { revealed: false, ev: -1, fam: 'darshan', now: Date.now(), musicOn: false };
   }
   componentDidMount() {
+    this.playMusic();
     this.timer = setInterval(() => this.setState({ now: Date.now() }), 1000);
   }
   componentWillUnmount() {
+    if (this.audio) this.audio.pause();
     clearInterval(this.timer);
   }
-  /* ---------- background song: Aaj Sajeya ---------- */
-  playMusic() {
-    if (!this.audio) { this.audio = new Audio('music/aaj-sajeya.mp3'); this.audio.loop = true; this.audio.volume = 0.85; }
-    const p = this.audio.play(); if (p && p.catch) p.catch(() => {});
-    if (!this.state.musicOn) this.setState({ musicOn: true });
+  /* ---------- background song: Aaj Sajeya (plays by default) ---------- */
+  playMusic(fromUser) {
+    if (fromUser === true) this.userPaused = false;
+    if (this.userPaused) return;
+    if (!this.audio) { this.audio = new Audio('music/aaj-sajeya.mp3'); this.audio.loop = true; this.audio.volume = 0.85; this.audio.preload = 'auto'; }
+    const p = this.audio.play();
+    const ok = () => { if (!this.state.musicOn) this.setState({ musicOn: true }); };
+    if (p && p.then) p.then(ok).catch(() => this.armAutoplay()); else ok();
+  }
+  armAutoplay() {
+    if (this.armed) return;
+    this.armed = true;
+    const go = () => { this.armed = false; ['pointerdown', 'touchstart', 'keydown'].forEach((e) => document.removeEventListener(e, go, true)); this.playMusic(); };
+    ['pointerdown', 'touchstart', 'keydown'].forEach((e) => document.addEventListener(e, go, true));
   }
   pauseSong() {
+    this.userPaused = true;
     if (this.audio) this.audio.pause();
     if (this.state.musicOn) this.setState({ musicOn: false });
   }
@@ -399,10 +411,10 @@ class Component extends DCLogic {
     const cd = { d: String(Math.floor(diff / 86400000)), h: pad2(Math.floor(diff / 3600000) % 24), m: pad2(Math.floor(diff / 60000) % 60), s: pad2(Math.floor(diff / 1000) % 60) };
 
     return {
-      startSong: () => this.playMusic(),
+      startSong: () => this.playMusic(true),
       musicOn: !!this.state.musicOn, musicOff: !this.state.musicOn,
       musicLabel: this.state.musicOn ? 'गाना बंद करें' : 'गाना चालू करें',
-      toggleMusic: () => { if (this.state.musicOn) this.pauseSong(); else this.playMusic(); },
+      toggleMusic: () => { if (this.state.musicOn) this.pauseSong(); else this.playMusic(true); },
       revealed: this.state.revealed, notRevealed: !this.state.revealed,
       reveal: () => this.setState({ revealed: true }),
       events: raw, onCover: ev < 0, onEvent: ev >= 0, cur,
