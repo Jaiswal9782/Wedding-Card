@@ -1,0 +1,15 @@
+{
+  "name": "varun-aarti-wedding",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Varun & Aarti wedding invitation website",
+  "scripts": {
+    "start": "serve . --no-clipboard -l tcp://0.0.0.0:${PORT:-3000}"
+  },
+  "dependencies": {
+    "serve": "14.2.4"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
