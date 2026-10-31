@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>वरुण संग आरती – शुभ विवाह निमंत्रण</title>
 <meta property="og:title" content="वरुण संग आरती – शुभ विवाह निमंत्रण">
-<meta property="og:description" content="बुधवार, 25 नवम्बर 2026">
+<meta property="og:description" content="बुधवार, 25 नवम्बर 2026 · छोटी सादड़ी">
 <meta property="og:image" content="photos/couple-jacket.jpg">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -213,7 +213,7 @@ a{color:#7A1A2B}a:hover{color:#5C0F1E}
 <svg aria-hidden="true" width="100%" height="22" viewBox="0 0 480 22" preserveAspectRatio="none" style="display: block; margin-top: -1px; background: #FBF4EE; transform: scaleY(-1)"><path d="M0 22 L0 12 L18 15 L30 7 L48 13 L62 5 L80 12 L96 6 L112 14 L130 8 L146 13 L160 4 L178 11 L194 7 L210 15 L226 6 L244 12 L258 5 L276 13 L292 7 L308 14 L324 6 L340 11 L356 4 L372 13 L388 7 L404 14 L420 6 L436 12 L452 5 L468 13 L480 8 L480 22 Z" fill="#7A1A2B"></path></svg>
 
 <!-- ================= 5. WEDDING FUNCTIONS (BOOK) ================= -->
-<section class="cream" style="padding: 40px 20px 48px; display: flex; flex-direction: column; align-items: center; gap: 18px">
+<section class="cream" data-fn-auto style="padding: 40px 20px 48px; display: flex; flex-direction: column; align-items: center; gap: 18px">
 <p style="margin: 0; font-family: 'Great Vibes', cursive; font-size: 28px; color: #B08A3E">शगुन के सुनहरे पल</p>
 
 <sc-if value="{{onCover}}" hint-placeholder-val="{{ true }}">
@@ -286,7 +286,7 @@ a{color:#7A1A2B}a:hover{color:#5C0F1E}
 <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#B08A3E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3h7v7M21 3l-9 9M19 14v5a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h5"></path></svg><span>Open Google Maps</span></a>
 </div>
 </sc-for>
-<div style="width: 100%; box-sizing: border-box; border-radius: 16px; border: 1px solid rgba(230,207,160,0.5); padding: 14px 16px; font-family: 'Noto Sans Devanagari', sans-serif; font-size: 14px; line-height: 1.6; color: #F6E7D2"><strong style="color: #E6CFA0">नोट : </strong>बारात ब्याईजी सा. श्री नागेशजी, महेशजी, दिनेशजी जायसवाल, निवासी-छोटी सादड़ी वालों के यहाँ दि. 24 नवम्बर 2026, मंगलवार को बस द्वारा रात्रि 9:15 बजे जायेगी।</div>
+<div style="width: 100%; box-sizing: border-box; border-radius: 16px; border: 1px solid rgba(230,207,160,0.5); padding: 14px 16px; font-family: 'Noto Sans Devanagari', sans-serif; font-size: 14px; line-height: 1.6; color: #F6E7D2"><strong style="color: #E6CFA0">नोट : </strong>बारात ब्याईजी सा. श्री नागेशजी, महेशजी, दिनेशजी जायसवाल, निवासी-छोटी सादड़ी वालों के यहाँ बस द्वारा मंगलवार, 24 नवम्बर 2026 रात्रि 9:15 बजे जायेगी।</div>
 </section>
 <svg aria-hidden="true" width="100%" height="22" viewBox="0 0 480 22" preserveAspectRatio="none" style="display: block; margin-top: -1px; background: #FBF4EE; transform: scaleY(-1)"><path d="M0 22 L0 12 L18 15 L30 7 L48 13 L62 5 L80 12 L96 6 L112 14 L130 8 L146 13 L160 4 L178 11 L194 7 L210 15 L226 6 L244 12 L258 5 L276 13 L292 7 L308 14 L324 6 L340 11 L356 4 L372 13 L388 7 L404 14 L420 6 L436 12 L452 5 L468 13 L480 8 L480 22 Z" fill="#7A1A2B"></path></svg>
 
@@ -357,10 +357,32 @@ class Component extends DCLogic {
   componentDidMount() {
     this.playMusic();
     this.timer = setInterval(() => this.setState({ now: Date.now() }), 1000);
+    this.startFnAuto();
   }
   componentWillUnmount() {
     if (this.audio) this.audio.pause();
     clearInterval(this.timer);
+    clearInterval(this.fnTimer);
+    if (this.fnIO) this.fnIO.disconnect();
+  }
+  /* ---------- Wedding Functions: auto-swap while the section is on screen ---------- */
+  startFnAuto() {
+    const reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reduce) return;
+    this.fnHold = 0;
+    const hold = () => { this.fnHold = Date.now() + 12000; };
+    this.fnTimer = setInterval(() => {
+      const sec = document.querySelector('[data-fn-auto]');
+      if (!sec) return;
+      if (!this.fnIO && 'IntersectionObserver' in window) {
+        this.fnIO = new IntersectionObserver((es) => { this.fnVisible = es[0].isIntersecting; }, { threshold: 0.45 });
+        this.fnIO.observe(sec);
+        ['pointerdown', 'touchstart', 'keydown', 'focusin'].forEach((e) => sec.addEventListener(e, hold, { passive: true }));
+      }
+      if (!this.fnVisible || document.hidden || Date.now() < this.fnHold) return;
+      const N = this.fnN || 1, ev = this.state.ev;
+      this.setState({ ev: ev >= N - 1 ? -1 : ev + 1 });
+    }, 4000);
   }
   /* ---------- background song: Aaj Sajeya (plays by default) ---------- */
   playMusic(fromUser) {
@@ -402,6 +424,7 @@ class Component extends DCLogic {
       { name: 'आशीर्वाद समारोह एवं स्वरुचिभोज', short: 'गुरु, 26 नव.', date: D26, time: 'ढलती शाम से सुहानी रात तक', ...sai }
     ];
     const n = raw.length;
+    this.fnN = n;
     const ev = this.state.ev;
     const pad2 = (x) => String(x).padStart(2, '0');
     const c = ev >= 0 ? raw[ev] : raw[0];
@@ -412,7 +435,7 @@ class Component extends DCLogic {
     const venues = [
       { kicker: 'The Venue · निवास', name: home.venue, addr: home.addr, when: '19 एवं 23 नवम्बर 2026 के सभी कार्यक्रम', map: home.map },
       { kicker: 'The Venue · समारोह', name: sai.venue, addr: sai.addr, when: '24 एवं 26 नवम्बर 2026 के सभी कार्यक्रम', map: sai.map },
-      { kicker: 'The Venue · विवाह', name: sadri.venue, addr: sadri.addr, when: 'बुधवार, 25 नवम्बर 2026 · ओढ़नी/तिलक एवं शुभ लग्न', map: sadri.map }
+      { kicker: 'The Venue · विवाह स्थल', name: sadri.venue, addr: sadri.addr, when: 'बुधवार, 25 नवम्बर 2026 · ओढ़नी/तिलक एवं शुभ लग्न', map: sadri.map }
     ];
 
     const famRaw = [

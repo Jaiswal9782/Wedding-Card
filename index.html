@@ -3,9 +3,9 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Varun & Aarti</title>
-<meta property="og:title" content="Varun & Aarti">
-<meta property="og:description" content="बुधवार, 25 नवम्बर 2026">
+<title>Varun & Aarti – Royal Palace</title>
+<meta property="og:title" content="Varun & Aarti – Royal Palace">
+<meta property="og:description" content="बुधवार, 25 नवम्बर 2026 · छोटी सादड़ी">
 <meta property="og:image" content="photos/couple-jacket.jpg">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -266,7 +266,7 @@ a{color:#8E3B55}a:hover{color:#6B2440}
 </section>
 
 <!-- ================= WEDDING FUNCTIONS ================= -->
-<section id="functions" data-pv-nav="कार्यक्रम" style="padding: 44px 18px 50px; background: #F6DCDA; display: flex; flex-direction: column; align-items: center; gap: 16px; text-align: center">
+<section id="functions" data-fn-auto data-pv-nav="कार्यक्रम" style="padding: 44px 18px 50px; background: #F6DCDA; display: flex; flex-direction: column; align-items: center; gap: 16px; text-align: center">
 <h2 style="margin: 0; font-family: 'Cormorant Garamond', serif; font-weight: 500; font-size: 42px; line-height: 1.05; color: #4A2230">Wedding Functions</h2>
 <p style="margin: -8px 0 0; font-family: 'Noto Serif Devanagari', serif; font-size: 16px; color: #8E3B55">शगुन के सुनहरे पल</p>
 <div style="position: relative; width: 100%; max-width: 420px">
@@ -341,7 +341,7 @@ a{color:#8E3B55}a:hover{color:#6B2440}
 <a href="{{v.map}}" target="_blank" rel="noopener" style="margin-top: 8px; display: inline-flex; align-items: center; gap: 8px; min-height: 46px; padding: 0 22px; border-radius: 999px; border: 1.5px solid #D9B98A; background: #FFFFFF; color: #4A2230; text-decoration: none; font-size: 15px"><svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#B8893E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3h7v7M21 3l-9 9M19 14v5a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h5"></path></svg>Open Google Maps</a>
 </div>
 </sc-for>
-<p style="margin: 4px 0 0; padding: 14px 16px; border-radius: 14px; background: #FFFAF7; border: 1px dashed #D9B98A; font-family: 'Noto Serif Devanagari', serif; font-size: 14px; line-height: 1.7; color: #4A2230; text-align: left"><strong style="font-weight: 700; color: #8E3B55">नोट : </strong>बारात ब्याईजी सा. श्री नागेशजी, महेशजी, दिनेशजी जायसवाल, निवासी-छोटी सादड़ी वालों के यहाँ दि. 24 नवम्बर 2026, मंगलवार को बस द्वारा रात्रि 9:15 बजे जायेगी।</p>
+<p style="margin: 4px 0 0; padding: 14px 16px; border-radius: 14px; background: #FFFAF7; border: 1px dashed #D9B98A; font-family: 'Noto Serif Devanagari', serif; font-size: 14px; line-height: 1.7; color: #4A2230; text-align: left"><strong style="font-weight: 700; color: #8E3B55">नोट : </strong>बारात ब्याईजी सा. श्री नागेशजी, महेशजी, दिनेशजी जायसवाल, निवासी-छोटी सादड़ी वालों के यहाँ बस द्वारा मंगलवार, 24 नवम्बर 2026 रात्रि 9:15 बजे जायेगी।</p>
 </section>
 
 <!-- ================= FAMILIES ================= -->
@@ -406,10 +406,32 @@ class Component extends DCLogic {
   componentDidMount() {
     this.playMusic();
     this.timer = setInterval(() => this.setState({ now: Date.now() }), 1000);
+    this.startFnAuto();
   }
   componentWillUnmount() {
     if (this.audio) this.audio.pause();
     clearInterval(this.timer);
+    clearInterval(this.fnTimer);
+    if (this.fnIO) this.fnIO.disconnect();
+  }
+  /* ---------- Wedding Functions: auto-swap while the section is on screen ---------- */
+  startFnAuto() {
+    const reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reduce) return;
+    this.fnHold = 0;
+    const hold = () => { this.fnHold = Date.now() + 12000; };
+    this.fnTimer = setInterval(() => {
+      const sec = document.querySelector('[data-fn-auto]');
+      if (!sec) return;
+      if (!this.fnIO && 'IntersectionObserver' in window) {
+        this.fnIO = new IntersectionObserver((es) => { this.fnVisible = es[0].isIntersecting; }, { threshold: 0.45 });
+        this.fnIO.observe(sec);
+        ['pointerdown', 'touchstart', 'keydown', 'focusin'].forEach((e) => sec.addEventListener(e, hold, { passive: true }));
+      }
+      if (!this.fnVisible || document.hidden || Date.now() < this.fnHold) return;
+      const N = this.fnN || 1, ev = this.state.ev;
+      this.setState({ ev: ev >= N - 1 ? -1 : ev + 1 });
+    }, 4000);
   }
   /* ---------- background song: Aaj Sajeya (plays by default) ---------- */
   playMusic(fromUser) {
@@ -462,6 +484,7 @@ class Component extends DCLogic {
       ['आशीर्वाद समारोह एवं स्वरुचिभोज', 'Reception', 26, 18, 30, 'ढलती शाम से सुहानी रात तक', sai, 'diya', '#F2D6E6', 270]
     ];
     const N = raw.length;
+    this.fnN = N;
     const onOverview = !(s.ev >= 0);
     const i = onOverview ? 0 : Math.min(N - 1, s.ev);
     const pos = onOverview ? -1 : i;
@@ -496,7 +519,7 @@ class Component extends DCLogic {
     const venues = [
       { kicker: 'HOME · निवास', name: home.venue, addr: home.addr, when: '19 एवं 23 नवम्बर 2026 के सभी कार्यक्रम', map: map(home.mq) },
       { kicker: 'CELEBRATIONS · समारोह', name: sai.venue, addr: sai.addr, when: '24 एवं 26 नवम्बर 2026 के सभी कार्यक्रम', map: map(sai.mq) },
-      { kicker: 'WEDDING VENUE · विवाह', name: sadri.venue, addr: sadri.addr, when: 'बुधवार, 25 नवम्बर 2026 · ओढ़नी/तिलक एवं शुभ लग्न', map: map(sadri.mq) }
+      { kicker: 'WEDDING VENUE · विवाह स्थल', name: sadri.venue, addr: sadri.addr, when: 'बुधवार, 25 नवम्बर 2026 · ओढ़नी/तिलक एवं शुभ लग्न', map: map(sadri.mq) }
     ];
 
     const famRaw = [
