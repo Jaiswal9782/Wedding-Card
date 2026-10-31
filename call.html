@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="hi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>कॉल करें – वरुण संग आरती</title>
+<style>
+  body{margin:0;min-height:100vh;display:flex;align-items:center;justify-content:center;background:#7A1A2B;font-family:'Noto Sans Devanagari',system-ui,sans-serif;color:#4A3A36}
+  .card{margin:16px;max-width:360px;width:100%;box-sizing:border-box;padding:32px 24px;background:#F8EBD3;border-left:3px double #C9A45C;border-right:3px double #C9A45C;text-align:center;box-shadow:0 18px 40px rgba(0,0,0,.35)}
+  h1{margin:0 0 4px;font-size:22px;color:#7A1A2B}
+  p{margin:0 0 20px;font-size:15px;color:#8A6A2A}
+  a.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:52px;padding:0 28px;border-radius:999px;background:#7A1A2B;color:#FFF3DA;font-size:20px;text-decoration:none}
+  a.back{display:block;margin-top:18px;font-size:14px;color:#7A1A2B}
+</style>
+</head>
+<body>
+<div class="card">
+  <h1>राजेशकुमार - कुसुमलता जायसवाल</h1>
+  <p>उत्तराकांक्षी</p>
+  <a class="btn" id="call" href="tel:+919982556447">📞 <span id="num">99825 56447</span></a>
+  <a class="back" href="/invitation">निमंत्रण देखें</a>
+</div>
+<script>
+  (function () {
+    var allowed = { '919982556447': '99825 56447', '918949007668': '89490 07668' };
+    var n = (new URLSearchParams(location.search).get('n') || '').replace(/\D/g, '');
+    if (!allowed[n]) n = '919982556447';
+    var a = document.getElementById('call');
+    a.href = 'tel:+' + n;
+    document.getElementById('num').textContent = allowed[n];
+    if (/Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent)) { location.href = a.href; }
+  })();
+</script>
+</body>
+</html>
