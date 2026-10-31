@@ -27,13 +27,39 @@ a{color:#8E3B55}a:hover{color:#6B2440}
 .answer::-moz-range-thumb{width:64px;height:64px;border-radius:50%;background:transparent;border:0}
 .answer:focus-visible{outline:3px solid #FFFFFF;outline-offset:4px;border-radius:40px}
 .hint{animation:nudge 1.6s ease-in-out infinite}
+
+/* ===== animations & effects ===== */
+@keyframes fxRise{from{opacity:0;translate:0 34px;scale:.97}to{opacity:1;translate:0 0;scale:1}}
+@keyframes fxPop{0%{opacity:0;translate:0 24px;scale:.9}70%{opacity:1;scale:1.02}100%{opacity:1;translate:0 0;scale:1}}
+@keyframes fxShimmer{0%{background-position:150% 0}100%{background-position:-50% 0}}
+@keyframes fxTwinkle{0%,100%{opacity:0;scale:.4;rotate:0deg}50%{opacity:1;scale:1;rotate:45deg}}
+@keyframes fxDrift{0%{transform:translate(0,-6vh) rotate(0deg);opacity:0}10%{opacity:.85}100%{transform:translate(40px,108vh) rotate(420deg);opacity:0}}
+@keyframes fxGlow{0%,100%{box-shadow:0 0 0 0 rgba(201,163,92,.55)}50%{box-shadow:0 0 0 12px rgba(201,163,92,0)}}
+@keyframes fxFloat{0%,100%{translate:0 0}50%{translate:0 -8px}}
+.fx-shimmer{background-image:linear-gradient(105deg,var(--c1) 35%,#F3D58B 48%,#FFF4D6 50%,#F3D58B 52%,var(--c1) 65%);background-size:250% 100%;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.fx-petals{position:fixed;inset:0;pointer-events:none;z-index:45;overflow:hidden}
+.fx-petals i{position:absolute;top:0;width:11px;height:8px;border-radius:11px 0 11px 0;background:var(--p,#E78DA0);opacity:0}
+.fx-spark{position:absolute;color:#E2B65A;font-size:16px;pointer-events:none;opacity:0}
+@media (prefers-reduced-motion:no-preference){
+  .fx-shimmer{animation:fxShimmer 4.5s ease-in-out infinite}
+  .fx-petals i{animation:fxDrift linear infinite}
+  .fx-spark{animation:fxTwinkle 2.6s ease-in-out infinite}
+  .fx-pop{animation:fxPop .7s cubic-bezier(.2,.8,.2,1) both}
+  .fx-glow{animation:fxGlow 2.2s ease-out infinite}
+  .fx-float{animation:fxFloat 4s ease-in-out infinite}
+  @supports (animation-timeline: view()){
+    html:not(.pv-js) section > *:not(.fx-noreveal){animation:fxRise linear both;animation-timeline:view();animation-range:entry 0% entry 40%}
+  }
+}
 </style>
 
+<link rel="stylesheet" href="premium.css">
 </head>
 <body>
 <template id="tpl">
 <div style="width: 100%; display: flex; justify-content: center; background: #F3DCD8; font-family: 'Jost', 'Noto Serif Devanagari', sans-serif; color: #4A2230">
 <div style="width: 100%; max-width: 480px; display: flex; flex-direction: column; overflow: hidden; box-shadow: 0 0 50px rgba(142,59,85,0.18)">
+<div class="fx-petals" aria-hidden="true"><i style="left: 4%; animation-duration: 13s; animation-delay: 0s; --p: #E78DA0"></i><i style="left: 17%; animation-duration: 16s; animation-delay: 4s; --p: #F2B8C4"></i><i style="left: 31%; animation-duration: 12s; animation-delay: 8s; --p: #E9A23B"></i><i style="left: 46%; animation-duration: 17s; animation-delay: 2s; --p: #E78DA0"></i><i style="left: 60%; animation-duration: 14s; animation-delay: 6s; --p: #F2B8C4"></i><i style="left: 73%; animation-duration: 15s; animation-delay: 10s; --p: #E9A23B"></i><i style="left: 86%; animation-duration: 13s; animation-delay: 3s; --p: #E78DA0"></i><i style="left: 95%; animation-duration: 18s; animation-delay: 7s; --p: #F2B8C4"></i></div>
 <button type="button" onClick="{{toggleMusic}}" aria-pressed="{{musicOn}}" aria-label="{{musicLabel}}" style="position: fixed; right: 16px; bottom: 16px; z-index: 60; width: 52px; height: 52px; border-radius: 50%; border: 2px solid #C9A35C; background: #8E3B55; color: #C9A35C; box-shadow: 0 6px 16px rgba(0,0,0,0.25); cursor: pointer; display: flex; align-items: center; justify-content: center">
 <sc-if value="{{musicOn}}" hint-placeholder-val="{{ false }}"><svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"></path><circle cx="6" cy="18" r="3"></circle><circle cx="18" cy="16" r="3"></circle></svg></sc-if>
 <sc-if value="{{musicOff}}" hint-placeholder-val="{{ true }}"><svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"></path><circle cx="6" cy="18" r="3"></circle><circle cx="18" cy="16" r="3"></circle><path d="M3 3l18 18"></path></svg></sc-if>
@@ -81,7 +107,7 @@ a{color:#8E3B55}a:hover{color:#6B2440}
 </sc-if>
 
 <!-- ================= HERO: PALACE ================= -->
-<section style="position: relative; padding-bottom: 40px; background: linear-gradient(180deg, #F6D3D2 0%, #FBECE8 55%, #F7E1DD 100%); overflow: hidden; text-align: center">
+<section id="home" data-pv-nav="स्वागत" style="position: relative; padding-bottom: 40px; background: linear-gradient(180deg, #F6D3D2 0%, #FBECE8 55%, #F7E1DD 100%); overflow: hidden; text-align: center">
 <div aria-hidden="true" style="position: absolute; inset: 0; pointer-events: none">
 <div class="lantern" style="left: 6%; animation-delay: 0s"></div>
 <div class="lantern" style="left: 80%; animation-delay: 5s; width: 28px; height: 36px"></div>
@@ -115,10 +141,11 @@ a{color:#8E3B55}a:hover{color:#6B2440}
 <g stroke="#8BA37A" stroke-width="1.4" fill="none"><path d="M20 40 C26 70 18 96 24 120"></path><path d="M460 40 C454 70 462 96 456 120"></path></g>
 </svg>
 <div style="position: relative; margin: -14px 16px 0; padding: 70px 22px 30px; background: rgba(255,248,244,0.92); border: 3px solid #E3C9A0; border-radius: 210px 210px 18px 18px; box-shadow: 0 10px 30px rgba(142,59,85,0.12); display: flex; flex-direction: column; align-items: center; gap: 8px">
+<span class="fx-spark" aria-hidden="true" style="left: 18%; top: 90px; animation-delay: 0s">✦</span><span class="fx-spark" aria-hidden="true" style="left: 80%; top: 110px; animation-delay: 0.8s">✦</span><span class="fx-spark" aria-hidden="true" style="left: 12%; top: 260px; animation-delay: 1.6s">✦</span><span class="fx-spark" aria-hidden="true" style="left: 86%; top: 300px; animation-delay: 0.4s">✦</span><span class="fx-spark" aria-hidden="true" style="left: 50%; top: 56px; animation-delay: 1.2s">✦</span>
 <p style="margin: 0; font-size: 13px; letter-spacing: 3px; color: #8E3B55">YOU ARE CORDIALLY INVITED TO<br>THE WEDDING OF</p>
-<p style="margin: 6px 0 0; font-family: 'Great Vibes', cursive; font-size: 64px; line-height: 1; color: #8E3B55">Varun</p>
+<p class="fx-shimmer" style="--c1: #8E3B55; margin: 6px 0 0; font-family: 'Great Vibes', cursive; font-size: 64px; line-height: 1.15; color: #8E3B55">Varun</p>
 <p style="margin: 0; font-family: 'Cormorant Garamond', serif; font-weight: 600; font-size: 34px; line-height: 1; color: #B8893E">&amp;</p>
-<p style="margin: 0; font-family: 'Great Vibes', cursive; font-size: 64px; line-height: 1; color: #8E3B55">Aarti</p>
+<p class="fx-shimmer" style="--c1: #8E3B55; margin: 0; font-family: 'Great Vibes', cursive; font-size: 64px; line-height: 1.15; color: #8E3B55">Aarti</p>
 <p style="margin: 6px 0 0; font-family: 'Noto Serif Devanagari', serif; font-weight: 700; font-size: 21px; color: #4A2230">चि. वरुण (लोकेश) संग सौ. कां. आरती</p>
 
 <p style="margin: 22px 0 0; font-family: 'Cormorant Garamond', serif; font-size: 20px; letter-spacing: 3px; color: #8E3B55">WEDNESDAY · 25 · NOVEMBER · 2026</p>
@@ -136,37 +163,37 @@ a{color:#8E3B55}a:hover{color:#6B2440}
 </section>
 
 <!-- ================= MEET THE COUPLE ================= -->
-<section style="padding: 44px 24px 50px; background: linear-gradient(180deg, #FBEDEA, #F7DEDB); display: flex; flex-direction: column; align-items: center; gap: 10px; text-align: center">
+<section id="couple" data-pv-nav="वर-वधू" style="padding: 44px 24px 50px; background: linear-gradient(180deg, #FBEDEA, #F7DEDB); display: flex; flex-direction: column; align-items: center; gap: 10px; text-align: center">
 <p style="margin: 0; font-family: 'Great Vibes', cursive; font-size: 30px; color: #B8893E">Getting to Know Us</p>
 <h2 style="margin: 0; font-family: 'Cormorant Garamond', serif; font-weight: 500; font-size: 42px; line-height: 1.05; color: #4A2230">Meet The Couple</h2>
 <p style="margin: 0 0 22px; font-size: 16px; color: #8E3B55">दो दिल, एक सुन्दर सफ़र</p>
 
 <div style="position: relative; width: 240px; height: 300px; box-sizing: border-box; padding: 8px; border: 4px solid #E3C9A0; outline: 2px solid #F3E2C6; outline-offset: 5px; border-radius: 120px 120px 10px 10px; background: #F6E9D7">
 <div style="position: relative; width: 100%; height: 100%; overflow: hidden; border-radius: 112px 112px 5px 5px">
-<img src="photos/groom.jpg" alt="चि. वरुण" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 15%">
+<button type="button" class="pv-zoom" data-pv-lightbox="couple" data-full="photos/groom-full.jpg" data-caption="चि. वरुण (लोकेश)" aria-label="वरुण की फ़ोटो बड़ी करें" style="position: absolute; inset: 0; padding: 0; border: 0; background: transparent; cursor: zoom-in"><img src="photos/groom.jpg" alt="चि. वरुण" loading="lazy" decoding="async" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 15%"></button>
 </div>
 <svg aria-hidden="true" width="240" height="40" viewBox="0 0 240 40" style="position: absolute; left: -4px; top: -16px"><circle cx="120" cy="14" r="11" fill="#EFA3B4"></circle><circle cx="102" cy="20" r="8" fill="#FFFFFF"></circle><circle cx="138" cy="20" r="8" fill="#FFFFFF"></circle><circle cx="86" cy="26" r="6" fill="#F7C6D0"></circle><circle cx="154" cy="26" r="6" fill="#F7C6D0"></circle></svg>
 </div>
 <p style="margin: 22px 0 0; font-size: 14px; letter-spacing: 5px; color: #8E3B55">THE GROOM</p>
 <h3 style="margin: 0; font-family: 'Cormorant Garamond', serif; font-weight: 500; font-size: 36px; color: #4A2230">Varun</h3>
 <p style="margin: 0; font-family: 'Noto Serif Devanagari', serif; font-weight: 700; font-size: 22px; color: #8E3B55">चि. वरुण (लोकेश)</p>
-<p style="margin: 0 0 40px; font-family: 'Noto Serif Devanagari', serif; font-size: 15px; line-height: 1.7; color: #4A2230">सुपुत्र : श्रीमती कुसुमलता एवं श्री राजेश चौधरी<br>सुपौत्र : श्रीमती बिरजा देवी एवं स्व. श्री केशूरामजी चौधरी</p>
+<p style="margin: 0 0 40px; font-family: 'Noto Serif Devanagari', serif; font-size: 15px; line-height: 1.7; color: #4A2230">सुपौत्र : श्रीमती बिरजा देवी एवं स्व. श्री केशूरामजी चौधरी<br>सुपुत्र : श्रीमती कुसुमलता एवं श्री राजेश चौधरी</p>
 
 <div style="position: relative; width: 240px; height: 300px; box-sizing: border-box; padding: 8px; border: 4px solid #E3C9A0; outline: 2px solid #F3E2C6; outline-offset: 5px; border-radius: 120px 120px 10px 10px; background: #F6E9D7">
 <div style="position: relative; width: 100%; height: 100%; overflow: hidden; border-radius: 112px 112px 5px 5px">
-<img src="photos/bride.jpg" alt="सौ. कां. आरती" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 20%">
+<button type="button" class="pv-zoom" data-pv-lightbox="couple" data-full="photos/bride-full.jpg" data-caption="सौ. कां. आरती" aria-label="आरती की फ़ोटो बड़ी करें" style="position: absolute; inset: 0; padding: 0; border: 0; background: transparent; cursor: zoom-in"><img src="photos/bride.jpg" alt="सौ. कां. आरती" loading="lazy" decoding="async" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 20%"></button>
 </div>
 <svg aria-hidden="true" width="240" height="40" viewBox="0 0 240 40" style="position: absolute; left: -4px; top: -16px"><circle cx="120" cy="14" r="11" fill="#EFA3B4"></circle><circle cx="102" cy="20" r="8" fill="#FFFFFF"></circle><circle cx="138" cy="20" r="8" fill="#FFFFFF"></circle><circle cx="86" cy="26" r="6" fill="#F7C6D0"></circle><circle cx="154" cy="26" r="6" fill="#F7C6D0"></circle></svg>
 </div>
 <p style="margin: 22px 0 0; font-size: 14px; letter-spacing: 5px; color: #8E3B55">THE BRIDE</p>
 <h3 style="margin: 0; font-family: 'Cormorant Garamond', serif; font-weight: 500; font-size: 36px; color: #4A2230">Aarti</h3>
 <p style="margin: 0; font-family: 'Noto Serif Devanagari', serif; font-weight: 700; font-size: 22px; color: #8E3B55">सौ. कां. आरती</p>
-<p style="margin: 0; font-family: 'Noto Serif Devanagari', serif; font-size: 15px; line-height: 1.7; color: #4A2230">सुपुत्री : श्रीमती अनिता देवी एवं श्री नागेशजी जायसवाल<br>सुपौत्री : श्रीमती सुगना बाई एवं स्व. श्री भगवतीलालजी जायसवाल</p>
+<p style="margin: 0; font-family: 'Noto Serif Devanagari', serif; font-size: 15px; line-height: 1.7; color: #4A2230">सुपौत्री : श्रीमती सुगना बाई एवं स्व. श्री भगवतीलालजी जायसवाल<br>सुपुत्री : श्रीमती अनिता देवी एवं श्री नागेशजी जायसवाल</p>
 <p style="margin: 34px 6px 0; font-family: 'Noto Serif Devanagari', serif; font-style: italic; font-size: 19px; line-height: 1.8; color: #8E3B55">“कृपया पधारकर वर-वधु को शुभाशीर्वाद प्रदान कर हमें अनुग्रहित करें।”</p>
 </section>
 
 <!-- ================= SAVE THE DATE: ENVELOPE ================= -->
-<section style="position: relative; padding: 44px 20px 48px; background: #F9E4E1; display: flex; flex-direction: column; align-items: center; gap: 8px; text-align: center; overflow: hidden">
+<section id="date" data-pv-nav="तारीख़" style="position: relative; padding: 44px 20px 48px; background: #F9E4E1; display: flex; flex-direction: column; align-items: center; gap: 8px; text-align: center; overflow: hidden">
 <p style="margin: 0; font-family: 'Great Vibes', cursive; font-size: 30px; color: #B8893E">A Little Surprise</p>
 <h2 style="margin: 0; font-family: 'Cormorant Garamond', serif; font-weight: 500; font-size: 42px; line-height: 1.05; color: #4A2230">Save The Date</h2>
 <sc-if value="{{envClosed}}" hint-placeholder-val="{{ true }}">
@@ -188,7 +215,7 @@ a{color:#8E3B55}a:hover{color:#6B2440}
 </button>
 </sc-if>
 <sc-if value="{{envOpen}}" hint-placeholder-val="{{ false }}">
-<div style="width: 100%; max-width: 420px; box-sizing: border-box; margin-top: 12px; padding: 24px 18px 26px; background: #FFFAF7; border: 1.5px solid #E3C9A0; border-radius: 18px; box-shadow: 0 14px 30px rgba(142,59,85,0.15); display: flex; flex-direction: column; align-items: center; gap: 10px">
+<div class="fx-pop" style="width: 100%; max-width: 420px; box-sizing: border-box; margin-top: 12px; padding: 24px 18px 26px; background: #FFFAF7; border: 1.5px solid #E3C9A0; border-radius: 18px; box-shadow: 0 14px 30px rgba(142,59,85,0.15); display: flex; flex-direction: column; align-items: center; gap: 10px">
 <p style="margin: 0; font-family: 'Great Vibes', cursive; font-size: 32px; color: #8E3B55">The Big Day</p>
 <p style="margin: 0; font-family: 'Cormorant Garamond', serif; font-weight: 600; font-size: 24px; letter-spacing: 4px; color: #4A2230">25 NOVEMBER 2026</p>
 <p style="margin: 0 0 6px; font-family: 'Noto Serif Devanagari', serif; font-size: 15px; color: #8E3B55">शुभ लग्न · रात्रि 11:00 बजे</p>
@@ -209,29 +236,37 @@ a{color:#8E3B55}a:hover{color:#6B2440}
 </section>
 
 <!-- ================= PHOTO MEMORIES ================= -->
-<section style="padding: 44px 24px 54px; background: linear-gradient(180deg, #F7DEDB, #FBEDEA); display: flex; flex-direction: column; align-items: center; gap: 8px; text-align: center">
+<section id="gallery" data-pv-nav="गैलरी" style="padding: 44px 24px 54px; background: linear-gradient(180deg, #F7DEDB, #FBEDEA); display: flex; flex-direction: column; align-items: center; gap: 8px; text-align: center">
 <p style="margin: 0; font-family: 'Great Vibes', cursive; font-size: 30px; color: #B8893E">Captured Moments</p>
 <h2 style="margin: 0; font-family: 'Cormorant Garamond', serif; font-weight: 500; font-size: 42px; line-height: 1.05; color: #4A2230">Photo Memories</h2>
 <p style="margin: 0 0 24px; font-size: 16px; color: #8E3B55">हर मुस्कान, हर पल — हमेशा के लिए</p>
-<div role="region" aria-label="फ़ोटो गैलरी – स्क्रॉल करें" tabindex="0" style="width: calc(100% + 48px); margin: 0 -24px; box-sizing: border-box; display: flex; gap: 18px; overflow-x: auto; scroll-snap-type: x mandatory; scroll-padding: 0 calc(50% - 150px); padding: 10px calc(50% - 150px) 26px; -webkit-overflow-scrolling: touch; scrollbar-width: none">
-<div style="flex: 0 0 300px; scroll-snap-align: center; box-sizing: border-box; padding: 12px 12px 18px; background: #FFFFFF; border-radius: 14px; box-shadow: 0 16px 30px rgba(142,59,85,0.22); transform: rotate(-2deg)">
-<img src="photos/couple-jacket.jpg" alt="वरुण और आरती" style="display: block; width: 276px; height: 380px; object-fit: cover; object-position: 50% 20%; border-radius: 8px">
-<p style="margin: 12px 0 0; font-family: 'Great Vibes', cursive; font-size: 30px; line-height: 1; color: #8E3B55">Varun &amp; Aarti</p>
-</div>
-<div style="flex: 0 0 300px; scroll-snap-align: center; box-sizing: border-box; padding: 12px 12px 18px; background: #FFFFFF; border-radius: 14px; box-shadow: 0 16px 30px rgba(142,59,85,0.22); transform: rotate(2deg)">
-<img src="photos/couple-kurta.jpg" alt="वरुण और आरती" style="display: block; width: 276px; height: 380px; object-fit: cover; object-position: 50% 15%; border-radius: 8px">
-<p style="margin: 12px 0 0; font-family: 'Great Vibes', cursive; font-size: 30px; line-height: 1; color: #8E3B55">Together Forever</p>
-</div>
-<div style="flex: 0 0 300px; scroll-snap-align: center; box-sizing: border-box; padding: 12px 12px 18px; background: #FFFFFF; border-radius: 14px; box-shadow: 0 16px 30px rgba(142,59,85,0.22); transform: rotate(-1.5deg)">
-<img src="couple.jpg" alt="वरुण और आरती" style="display: block; width: 276px; height: 380px; object-fit: cover; border-radius: 8px">
-<p style="margin: 12px 0 0; font-family: 'Great Vibes', cursive; font-size: 30px; line-height: 1; color: #8E3B55">Blessed Moments</p>
+<div class="pv-slider" data-pv-slider data-pv-static data-interval="4500" role="region" aria-roledescription="carousel" aria-label="OUR MOMENTS" style="width: calc(100% + 48px); margin: 6px -24px 18px; display: flex; flex-direction: column; align-items: center; gap: 10px">
+<p style="margin: 0; font-family: 'Cormorant Garamond', serif; font-weight: 600; font-size: 22px; letter-spacing: 2px; color: #4A2230">OUR MOMENTS</p>
+<p style="margin: -6px 0 4px; font-size: 14px; color: #8E3B55">हमारे ख़ास पल</p>
+<div class="pv-viewport" tabindex="0" style="width: 100%; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; -webkit-overflow-scrolling: touch">
+<div class="pv-track" style="display: flex; gap: 18px; padding: 12px calc(50% - 130px) 22px; width: max-content">
+<figure class="pv-slide" style="flex: 0 0 260px; margin: 0; scroll-snap-align: center; box-sizing: border-box; padding: 10px 10px 14px; background: #FFFFFF; border-radius: 16px; box-shadow: 0 14px 28px rgba(142,59,85,0.18); rotate: -2deg"><button type="button" class="pv-zoom" data-pv-lightbox="moments" data-full="photos/couple-jacket.jpg" data-caption="Varun &amp; Aarti" aria-label="फ़ोटो बड़ी करें: Varun &amp; Aarti" style="display: block; width: 100%; padding: 0; border: 0; background: transparent; cursor: zoom-in; border-radius: 10px; overflow: hidden"><img src="photos/couple-jacket.jpg" alt="Varun &amp; Aarti" loading="lazy" decoding="async" style="display: block; width: 240px; height: 320px; object-fit: cover; object-position: 50% 20%"></button><figcaption style="margin: 10px 0 0; font-family: 'Great Vibes', cursive; font-size: 26px; line-height: 1; color: #8E3B55">Varun &amp; Aarti</figcaption></figure>
+<figure class="pv-slide" style="flex: 0 0 260px; margin: 0; scroll-snap-align: center; box-sizing: border-box; padding: 10px 10px 14px; background: #FFFFFF; border-radius: 16px; box-shadow: 0 14px 28px rgba(142,59,85,0.18); rotate: 2deg"><button type="button" class="pv-zoom" data-pv-lightbox="moments" data-full="photos/couple-kurta.jpg" data-caption="Together Forever" aria-label="फ़ोटो बड़ी करें: Together Forever" style="display: block; width: 100%; padding: 0; border: 0; background: transparent; cursor: zoom-in; border-radius: 10px; overflow: hidden"><img src="photos/couple-kurta.jpg" alt="Together Forever" loading="lazy" decoding="async" style="display: block; width: 240px; height: 320px; object-fit: cover; object-position: 50% 15%"></button><figcaption style="margin: 10px 0 0; font-family: 'Great Vibes', cursive; font-size: 26px; line-height: 1; color: #8E3B55">Together Forever</figcaption></figure>
+<figure class="pv-slide" style="flex: 0 0 260px; margin: 0; scroll-snap-align: center; box-sizing: border-box; padding: 10px 10px 14px; background: #FFFFFF; border-radius: 16px; box-shadow: 0 14px 28px rgba(142,59,85,0.18); rotate: -1.5deg"><button type="button" class="pv-zoom" data-pv-lightbox="moments" data-full="couple.jpg" data-caption="Blessed Moments" aria-label="फ़ोटो बड़ी करें: Blessed Moments" style="display: block; width: 100%; padding: 0; border: 0; background: transparent; cursor: zoom-in; border-radius: 10px; overflow: hidden"><img src="couple.jpg" alt="Blessed Moments" loading="lazy" decoding="async" style="display: block; width: 240px; height: 320px; object-fit: cover; object-position: 50% 30%"></button><figcaption style="margin: 10px 0 0; font-family: 'Great Vibes', cursive; font-size: 26px; line-height: 1; color: #8E3B55">Blessed Moments</figcaption></figure>
 </div>
 </div>
-<p style="margin: 0; display: flex; align-items: center; gap: 8px; font-size: 14px; color: #8E3B55"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6l-6 6 6 6"></path></svg>स्वाइप करें · 3 फ़ोटो<svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"></path></svg></p>
+<div style="display: flex; align-items: center; gap: 16px"><button type="button" class="pv-prev" aria-label="पिछली फ़ोटो" style="width: 46px; height: 46px; border-radius: 50%; border: 1.5px solid #C9A35C; background: #FFFAF7; color: #8E3B55; cursor: pointer; display: flex; align-items: center; justify-content: center"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6l-6 6 6 6"></path></svg></button><div class="pv-dots" style="display: flex; gap: 6px; min-width: 40px; justify-content: center"></div><button type="button" class="pv-next" aria-label="अगली फ़ोटो" style="width: 46px; height: 46px; border-radius: 50%; border: 1.5px solid #C9A35C; background: #FFFAF7; color: #8E3B55; cursor: pointer; display: flex; align-items: center; justify-content: center"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"></path></svg></button></div>
+</div>
+<div class="pv-slider" data-pv-slider data-pv-static data-interval="5500" role="region" aria-roledescription="carousel" aria-label="THE BRIDE &amp; GROOM" style="width: calc(100% + 48px); margin: 6px -24px 18px; display: flex; flex-direction: column; align-items: center; gap: 10px">
+<p style="margin: 0; font-family: 'Cormorant Garamond', serif; font-weight: 600; font-size: 22px; letter-spacing: 2px; color: #4A2230">THE BRIDE &amp; GROOM</p>
+<p style="margin: -6px 0 4px; font-size: 14px; color: #8E3B55">वर · वधू</p>
+<div class="pv-viewport" tabindex="0" style="width: 100%; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; -webkit-overflow-scrolling: touch">
+<div class="pv-track" style="display: flex; gap: 18px; padding: 12px calc(50% - 130px) 22px; width: max-content">
+<figure class="pv-slide" style="flex: 0 0 260px; margin: 0; scroll-snap-align: center; box-sizing: border-box; padding: 10px 10px 14px; background: #FFFFFF; border-radius: 16px; box-shadow: 0 14px 28px rgba(142,59,85,0.18); rotate: 1.5deg"><button type="button" class="pv-zoom" data-pv-lightbox="portraits" data-full="photos/groom-full.jpg" data-caption="The Groom · वरुण" aria-label="फ़ोटो बड़ी करें: The Groom · वरुण" style="display: block; width: 100%; padding: 0; border: 0; background: transparent; cursor: zoom-in; border-radius: 10px; overflow: hidden"><img src="photos/groom-full.jpg" alt="The Groom · वरुण" loading="lazy" decoding="async" style="display: block; width: 240px; height: 320px; object-fit: cover; object-position: 50% 12%"></button><figcaption style="margin: 10px 0 0; font-family: 'Great Vibes', cursive; font-size: 26px; line-height: 1; color: #8E3B55">The Groom · वरुण</figcaption></figure>
+<figure class="pv-slide" style="flex: 0 0 260px; margin: 0; scroll-snap-align: center; box-sizing: border-box; padding: 10px 10px 14px; background: #FFFFFF; border-radius: 16px; box-shadow: 0 14px 28px rgba(142,59,85,0.18); rotate: -1.5deg"><button type="button" class="pv-zoom" data-pv-lightbox="portraits" data-full="photos/bride-full.jpg" data-caption="The Bride · आरती" aria-label="फ़ोटो बड़ी करें: The Bride · आरती" style="display: block; width: 100%; padding: 0; border: 0; background: transparent; cursor: zoom-in; border-radius: 10px; overflow: hidden"><img src="photos/bride-full.jpg" alt="The Bride · आरती" loading="lazy" decoding="async" style="display: block; width: 240px; height: 320px; object-fit: cover; object-position: 50% 18%"></button><figcaption style="margin: 10px 0 0; font-family: 'Great Vibes', cursive; font-size: 26px; line-height: 1; color: #8E3B55">The Bride · आरती</figcaption></figure>
+</div>
+</div>
+<div style="display: flex; align-items: center; gap: 16px"><button type="button" class="pv-prev" aria-label="पिछली फ़ोटो" style="width: 46px; height: 46px; border-radius: 50%; border: 1.5px solid #C9A35C; background: #FFFAF7; color: #8E3B55; cursor: pointer; display: flex; align-items: center; justify-content: center"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6l-6 6 6 6"></path></svg></button><div class="pv-dots" style="display: flex; gap: 6px; min-width: 40px; justify-content: center"></div><button type="button" class="pv-next" aria-label="अगली फ़ोटो" style="width: 46px; height: 46px; border-radius: 50%; border: 1.5px solid #C9A35C; background: #FFFAF7; color: #8E3B55; cursor: pointer; display: flex; align-items: center; justify-content: center"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"></path></svg></button></div>
+</div>
 </section>
 
 <!-- ================= WEDDING FUNCTIONS ================= -->
-<section style="padding: 44px 18px 50px; background: #F6DCDA; display: flex; flex-direction: column; align-items: center; gap: 16px; text-align: center">
+<section id="functions" data-pv-nav="कार्यक्रम" style="padding: 44px 18px 50px; background: #F6DCDA; display: flex; flex-direction: column; align-items: center; gap: 16px; text-align: center">
 <h2 style="margin: 0; font-family: 'Cormorant Garamond', serif; font-weight: 500; font-size: 42px; line-height: 1.05; color: #4A2230">Wedding Functions</h2>
 <p style="margin: -8px 0 0; font-family: 'Noto Serif Devanagari', serif; font-size: 16px; color: #8E3B55">शगुन के सुनहरे पल</p>
 <div style="position: relative; width: 100%; max-width: 420px">
@@ -248,16 +283,16 @@ a{color:#8E3B55}a:hover{color:#6B2440}
 <svg aria-hidden="true" width="52" height="46" viewBox="0 0 64 56"><path d="M32 4 C24 16 24 30 32 40 C40 30 40 16 32 4Z" fill="#C0405E"></path><path d="M32 40 C20 38 10 28 8 16 C20 18 28 26 32 40Z" fill="#E38599"></path><path d="M32 40 C44 38 54 28 56 16 C44 18 36 26 32 40Z" fill="#E38599"></path><path d="M10 46 C22 52 42 52 54 46" stroke="#C9A35C" stroke-width="2" fill="none"></path></svg>
 <p style="margin: 0; font-family: 'Great Vibes', cursive; font-size: 34px; line-height: 1.1; color: #8E3B55">All Functions</p>
 <p style="margin: 0 0 8px; font-family: 'Noto Serif Devanagari', serif; font-size: 15px; color: #4A2230">आप हर कार्यक्रम में पधारें, यही हमारी कामना है।</p>
-<div style="width: 100%; display: flex; flex-direction: column">
+<div class="pv-timeline" style="width: 100%; display: flex; flex-direction: column">
 <sc-for list="{{overview}}" as="o" hint-placeholder-count="11">
 <button type="button" onClick="{{o.open}}" aria-label="{{o.label}}" style="width: 100%; min-height: 44px; padding: 6px 2px; display: flex; align-items: baseline; gap: 8px; background: transparent; border: 0; cursor: pointer; font-family: 'Noto Serif Devanagari', serif; text-align: left"><span style="font-weight: 700; font-size: 15px; color: #4A2230; white-space: nowrap">{{o.name}}</span><span aria-hidden="true" style="flex: 1; min-width: 12px; border-bottom: 1.5px dotted #D9B98A; transform: translateY(-4px)"></span><span style="font-size: 14px; color: #8E3B55; white-space: nowrap">{{o.short}}</span></button>
 </sc-for>
 </div>
-<button type="button" onClick="{{startTour}}" style="margin-top: 12px; display: inline-flex; align-items: center; gap: 10px; min-height: 48px; padding: 0 22px; border-radius: 999px; border: 1.5px solid #C9A35C; background: #F6D3D7; color: #6B2440; cursor: pointer; font-family: 'Cormorant Garamond', serif; font-weight: 600; font-size: 16px; letter-spacing: 3px"><span aria-hidden="true" style="width: 9px; height: 9px; border-radius: 50%; background: #C0405E"></span>TAP TO SEE EACH FUNCTION</button>
+<button type="button" class="fx-glow" onClick="{{startTour}}" style="margin-top: 12px; display: inline-flex; align-items: center; gap: 10px; min-height: 48px; padding: 0 22px; border-radius: 999px; border: 1.5px solid #C9A35C; background: #F6D3D7; color: #6B2440; cursor: pointer; font-family: 'Cormorant Garamond', serif; font-weight: 600; font-size: 16px; letter-spacing: 3px"><span aria-hidden="true" style="width: 9px; height: 9px; border-radius: 50%; background: #C0405E"></span>TAP TO SEE EACH FUNCTION</button>
 </div>
 </sc-if>
 <sc-if value="{{onEvent}}" hint-placeholder-val="{{ false }}">
-<div style="{{cur.archStyle}}">
+<div class="fx-pop" style="{{cur.archStyle}}">
 <sc-if value="{{cur.kalash}}" hint-placeholder-val="{{ true }}">
 <svg role="img" aria-label="कलश" width="120" height="140" viewBox="0 0 100 120"><path d="M50 22 C38 8 22 10 14 20 C26 22 38 22 50 26Z" fill="#4F8A4A"></path><path d="M50 22 C62 8 78 10 86 20 C74 22 62 22 50 26Z" fill="#4F8A4A"></path><path d="M50 24 C46 10 50 2 50 2 C50 2 54 10 50 24Z" fill="#5E9C57"></path><ellipse cx="50" cy="34" rx="14" ry="15" fill="#9A5B2E"></ellipse><path d="M24 58 C24 44 76 44 76 58 C76 96 64 112 50 112 C36 112 24 96 24 58Z" fill="#D9A441" stroke="#B07F25" stroke-width="2"></path><rect x="30" y="46" width="40" height="8" rx="3" fill="#C0405E"></rect><path d="M40 78 h20 M50 68 v20" stroke="#C0405E" stroke-width="3"></path></svg>
 </sc-if>
@@ -293,7 +328,7 @@ a{color:#8E3B55}a:hover{color:#6B2440}
 </section>
 
 <!-- ================= VENUES ================= -->
-<section style="padding: 44px 18px 48px; background: linear-gradient(180deg, #F6DCDA, #FBEDEA); display: flex; flex-direction: column; align-items: center; gap: 16px; text-align: center">
+<section id="venue" data-pv-nav="स्थान" style="padding: 44px 18px 48px; background: linear-gradient(180deg, #F6DCDA, #FBEDEA); display: flex; flex-direction: column; align-items: center; gap: 16px; text-align: center">
 <p style="margin: 0; font-family: 'Great Vibes', cursive; font-size: 30px; color: #B8893E">Find Us</p>
 <h2 style="margin: -6px 0 0; font-family: 'Cormorant Garamond', serif; font-weight: 500; font-size: 42px; line-height: 1.05; color: #4A2230">The Venue</h2>
 <p style="margin: -6px 0 6px; font-size: 16px; color: #8E3B55">Where Hearts Unite</p>
@@ -310,7 +345,7 @@ a{color:#8E3B55}a:hover{color:#6B2440}
 </section>
 
 <!-- ================= FAMILIES ================= -->
-<section style="padding: 44px 18px 30px; background: #FBEDEA; display: flex; flex-direction: column; gap: 12px">
+<section id="family" data-pv-nav="परिवार" style="padding: 44px 18px 30px; background: #FBEDEA; display: flex; flex-direction: column; gap: 12px">
 <p style="margin: 0; text-align: center; font-family: 'Great Vibes', cursive; font-size: 30px; color: #B8893E">With Love</p>
 <h2 style="margin: -6px 0 10px; text-align: center; font-family: 'Cormorant Garamond', serif; font-weight: 500; font-size: 42px; color: #4A2230">Our Families</h2>
 <sc-for list="{{fams}}" as="f" hint-placeholder-count="4">
@@ -335,12 +370,12 @@ a{color:#8E3B55}a:hover{color:#6B2440}
 </section>
 
 <!-- ================= CLOSING ================= -->
-<section style="position: relative; padding: 40px 24px 56px; background: linear-gradient(180deg, #FBEDEA, #F4D3D3); display: flex; flex-direction: column; align-items: center; gap: 12px; text-align: center; overflow: hidden">
+<section id="blessings" data-pv-nav="आशीर्वाद" style="position: relative; padding: 40px 24px 56px; background: linear-gradient(180deg, #FBEDEA, #F4D3D3); display: flex; flex-direction: column; align-items: center; gap: 12px; text-align: center; overflow: hidden">
 <p style="margin: 0; font-family: 'Great Vibes', cursive; font-size: 34px; line-height: 1.3; color: #B8893E">“Two souls, one heart,<br>one beautiful journey.”</p>
 <div style="margin-top: 18px; width: 140px; height: 140px; border-radius: 50%; position: relative; overflow: hidden; border: 5px double #C9A35C; box-shadow: 0 10px 24px rgba(142,59,85,0.25)">
-<img src="photos/couple-circle.jpg" alt="वरुण और आरती" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover">
+<button type="button" class="pv-zoom" data-pv-lightbox="closing" data-full="photos/couple-kurta.jpg" data-caption="Varun &amp; Aarti" aria-label="फ़ोटो बड़ी करें" style="position: absolute; inset: 0; padding: 0; border: 0; background: transparent; cursor: zoom-in"><img src="photos/couple-circle.jpg" alt="वरुण और आरती" loading="lazy" decoding="async" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover"></button>
 </div>
-<p style="margin: 10px 0 0; font-family: 'Great Vibes', cursive; font-size: 56px; line-height: 1.1; color: #8E3B55">Varun &amp; Aarti</p>
+<p class="fx-shimmer" style="--c1: #8E3B55; margin: 10px 0 0; font-family: 'Great Vibes', cursive; font-size: 56px; line-height: 1.2; color: #8E3B55">Varun &amp; Aarti</p>
 <p style="margin: 0; font-size: 18px; color: #B8893E">❦ ✿ ❦</p>
 <p style="margin: 0; font-family: 'Cormorant Garamond', serif; font-size: 20px; color: #4A2230">“आपकी उपस्थिति ही हमारा सौभाग्य है”</p>
 <p style="margin: 0; font-family: 'Noto Serif Devanagari', serif; font-size: 15px; color: #8E3B55">बुधवार | 25 नवम्बर 2026 · छोटी सादड़ी</p>
@@ -468,7 +503,7 @@ class Component extends DCLogic {
       { id: 'darshan', title: 'दर्शनाभिलाषी', text: 'श्री रमेशचन्द्रजी-चन्द्रकान्ता, अशोकजी-शकुन्तला बाई, राजेन्द्रजी-सुशीला बाई, स्व. श्री गजेन्द्रजी-विजयलक्ष्मी, देवेन्द्रजी-राधा बाई, मनीषजी-मधु बाई, विकासजी-ममता बाई, लोकेश-चन्द्रकान्ता, पिन्टू-गायत्री, इन्द्रजीत-सन्तोष, दीपक-मिथलेश, हेमन्त-अंतिमा, चन्द्रशेखर-अनुराधा, योगेश-रेखा, कपिल जी, प्रिंस जी एवं समस्त मेलीवाल परिवार।' },
       { id: 'aagrah', title: 'विशेष आग्रह', text: 'राजेन्द्रजी-सुशीला, इन्द्रजीतजी-सन्तोष, मनीषजी-मधुबाला, भारती-दिनेशजी, जितेन्द्र-निशा, योगेश-रेखा, गौरव, सौरभ, कपिल, प्रिन्स, युगलकिशोर-सीमा, देवांश, हेमाक्षी' },
       { id: 'nanihal', title: 'ननिहाल पक्ष', text: 'स्व. श्री दौलतरामजी-स्व. श्रीमती मेहताब देवी, स्व. श्री मदनलालजी-स्व. श्रीमती प्रेम देवी, स्व. श्री केसरीमलजी-श्रीमती चन्दा देवी, स्व. श्री राजेन्द्रजी-स्व. श्रीमती सुशीला देवी, श्री महेन्द्रजी-श्रीमती रुजन देवी, स्व. श्री सुरेन्द्रजी-श्रीमती दक्षा देवी, स्व. श्री प्रकाशजी-श्रीमती इन्द्रा देवी, श्री राकेशजी-श्रीमती शोभा देवी, श्री गगनजी, श्री यशराजजी एवं समस्त जायसवाल परिवार (अजमेर)' },
-      { id: 'swagat', title: 'स्वागतातुर', text: 'श्रीमती देवकन्या बेबी-स्व. श्री रामकिशनजी, श्रीमती शोभा-डॉ. स्व. श्री प्रेमचन्दजी, श्रीमती उमा-स्व. श्री जगदीशजी, श्रीमती सुनीता-श्री अरुणजी, डॉ. आरती, श्रीमती साची-श्री अतुलजी, पंकजजी, सुनीलजी, डॉ. दीपेन्द्रसिंहजी, रणजीतजी, वैभवजी, मधुबाला-मनीषजी, भारती-दिनेशजी, लवीना-जिगरजी, गौरवजी, सौरभजी, कपिल जी, प्रिंस जी' }
+      { id: 'swagat', title: 'स्वागतातुर', text: 'श्रीमती देवकन्या बेबी-स्व. श्री रामकिशनजी, श्रीमती शोभा-डॉ. स्व. श्री प्रेमचन्दजी, श्रीमती उमा-स्व. श्री जगदीशजी, श्रीमती सुनीता-श्री अरुणजी, डॉ. आरती, श्रीमती साची-श्री अतुलजी, पंकजजी, सुनीलजी, डॉ. दीपेन्द्रसिंहजी, रणजीतजी, वैभवजी, मधुबाला-मनीषजी, भारती-दिनेशजी, लवीना-जिगरजी, गौरवजी, सौरभजी, कपिल जी, प्रिंस जी, युगलकिशोर-सीमा' }
     ];
     const fams = famRaw.map((f) => {
       const open = f.id === s.fam;
@@ -512,5 +547,6 @@ class Component extends DCLogic {
 window.Component = Component;
 startInvitation();
 </script>
+<script src="premium.js" defer></script>
 </body>
 </html>

@@ -112,6 +112,14 @@
     walk(tpl.content, next, vals);
     morphdom(app, next, {
       onBeforeElUpdated: function (from, to) {
+        if (from.hasAttribute && from.hasAttribute('data-pv-static')) return false;
+        if (from.classList && from.classList.length) {
+          for (var ci = 0; ci < from.classList.length; ci++) {
+            var cn = from.classList[ci];
+            if (cn.indexOf('pv-') === 0 && !to.classList.contains(cn)) to.classList.add(cn);
+          }
+        }
+        if (from.hasAttribute && from.hasAttribute('aria-current') && /pv-dots|pv-nav/.test((from.parentNode && from.parentNode.className) || '')) to.setAttribute('aria-current', from.getAttribute('aria-current'));
         if (from.tagName === 'INPUT' && from === document.activeElement && from.type === 'range') {
           from.value = to.getAttribute('value');
         }
