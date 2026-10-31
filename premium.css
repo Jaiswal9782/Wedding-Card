@@ -54,11 +54,11 @@ body{background:radial-gradient(1200px 600px at 50% -10%,#FBEDE6 0%,#EADBCF 55%,
 @keyframes pvFloatUp{0%{transform:translate(0,0);opacity:0}15%{opacity:.9}100%{transform:translate(var(--dx,20px),-105vh);opacity:0}}
 
 /* ---------- buttons: hover & press ---------- */
-.pv-js section a[href],.pv-js section button:not(.pv-zoom){transition:transform .25s var(--pv-ease),box-shadow .25s var(--pv-ease),filter .25s}
+.pv-js section a[href]:not(.fx-seal),.pv-js section button:not(.pv-zoom){transition:transform .25s var(--pv-ease),box-shadow .25s var(--pv-ease),filter .25s}
 @media (hover:hover){
-  .pv-js section a[href]:hover,.pv-js section button:not(.pv-zoom):hover{transform:translateY(-2px);box-shadow:0 10px 22px rgba(122,26,43,.18)}
+  .pv-js section a[href]:not(.fx-seal):hover,.pv-js section button:not(.pv-zoom):hover{transform:translateY(-2px);box-shadow:0 10px 22px rgba(122,26,43,.18)}
 }
-.pv-js section a[href]:active,.pv-js section button:not(.pv-zoom):active{transform:scale(.97)}
+.pv-js section a[href]:not(.fx-seal):active,.pv-js section button:not(.pv-zoom):active{transform:scale(.97)}
 
 /* ---------- animated timeline (functions overview) ---------- */
 .pv-timeline{position:relative;padding-left:22px !important}
